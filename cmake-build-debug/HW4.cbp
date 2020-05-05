@@ -110,16 +110,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/include/constants.h">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/include/ClientList.h">
 			<Option target="Client"/>
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/include/server.h">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/include/constants.h">
 			<Option target="Client"/>
 			<Option target="Server"/>
 		</Unit>
 		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/src/client/client.c">
 			<Option target="Client"/>
+		</Unit>
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c">
+			<Option target="Server"/>
 		</Unit>
 		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c">
 			<Option target="Server"/>

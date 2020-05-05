@@ -6,7 +6,7 @@
 #include <pwd.h>
 
 #include "../../include/constants.h";
-#include "../../include/server.h";
+#include "../../include/ClientList.h";
 
 static int server_sock_fd;
 static struct sockaddr_un domain_sock_addr;

@@ -163,6 +163,33 @@ src/client/client.c.s:
 	$(MAKE) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/src/client/client.c.s
 .PHONY : src/client/client.c.s
 
+src/server/ClientList.o: src/server/ClientList.c.o
+
+.PHONY : src/server/ClientList.o
+
+# target to build an object file
+src/server/ClientList.c.o:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/src/server/ClientList.c.o
+.PHONY : src/server/ClientList.c.o
+
+src/server/ClientList.i: src/server/ClientList.c.i
+
+.PHONY : src/server/ClientList.i
+
+# target to preprocess a source file
+src/server/ClientList.c.i:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/src/server/ClientList.c.i
+.PHONY : src/server/ClientList.c.i
+
+src/server/ClientList.s: src/server/ClientList.c.s
+
+.PHONY : src/server/ClientList.s
+
+# target to generate assembly for a file
+src/server/ClientList.c.s:
+	$(MAKE) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/src/server/ClientList.c.s
+.PHONY : src/server/ClientList.c.s
+
 src/server/server.o: src/server/server.c.o
 
 .PHONY : src/server/server.o
@@ -203,6 +230,9 @@ help:
 	@echo "... src/client/client.o"
 	@echo "... src/client/client.i"
 	@echo "... src/client/client.s"
+	@echo "... src/server/ClientList.o"
+	@echo "... src/server/ClientList.i"
+	@echo "... src/server/ClientList.s"
 	@echo "... src/server/server.o"
 	@echo "... src/server/server.i"
 	@echo "... src/server/server.s"

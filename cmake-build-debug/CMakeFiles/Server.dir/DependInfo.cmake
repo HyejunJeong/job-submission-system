@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c" "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/Server.dir/src/server/ClientList.c.o"
   "/home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c" "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/Server.dir/src/server/server.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
