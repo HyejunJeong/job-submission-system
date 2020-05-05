@@ -15,4 +15,4 @@ file(GLOB server_src
 
 add_executable(Server ${server_src})
 
-add_executable(Client ${client_src} include/constants.h include/server.h)
+add_executable(Client ${client_src})
