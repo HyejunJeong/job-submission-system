@@ -105,8 +105,9 @@ void onExitCallBack (void){
     printf("deleting the file, please rerun the server\n");
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
+    const char* file_path = strcat(homedir, FILE_NAME);
     // unlock the domain socket. This will create a process lock otherwise
-    unlink(homedir);
+    unlink(file_path);
 }
 
 static void create_sock(){
