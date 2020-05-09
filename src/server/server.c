@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <poll.h>
 
-#include "../../include/constants.h";
-#include "../../include/ClientList.h";
+#include "../../include/constants.h"
+#include "../../include/ClientList.h"
 
 static int server_sock_fd;
 static struct sockaddr_un domain_sock_addr;
@@ -32,13 +32,19 @@ int main(int argc, char** argv, char** envp) {
     // set up the unix domain socket
     create_sock();
     // start accepting client, it is just like a network socket
-    int newClientFd = accept(server_sock_fd, NULL, NULL);
+    int newClientFd;
+    if((newClientFd = accept(server_sock_fd, NULL, NULL)) < 0) {
+        perror("accept");
+        exit(EXIT_FAILURE);
+    }
+
     char buffer[BUFFER_SIZE];
     int bytes_recieved = recv(newClientFd, buffer, BUFFER_SIZE, 0);
-    printf(buffer);
+    printf("%s\n", buffer);
     return 0;
 }
 
+<<<<<<< HEAD
 static void parse_args(int argc, char** argv){
     char c;
     while((c = getopt(argc, argv, "j:")) != -1){
@@ -64,6 +70,8 @@ static void init_pollfd(struct pollfd fds[]){
     }
 }
 
+=======
+>>>>>>> c42af8310924b96e1cc79da7db0981c6e2d2d8f4
 static void accept_client(){
 
     do {
@@ -83,7 +91,12 @@ void print_usage(char** argv){
 
 void onExitCallBack (void){
     struct passwd *pw = getpwuid(getuid());
+<<<<<<< HEAD
     char* homeDir = getenv("HOME");
+=======
+    const char *homedir = pw->pw_dir;
+    char* file_path = strcat((char *)homedir, FILE_NAME);
+>>>>>>> c42af8310924b96e1cc79da7db0981c6e2d2d8f4
     // unlock the domain socket. This will create a process lock otherwise
     unlink(homeDir);
 }
@@ -92,9 +105,21 @@ static void create_sock(){
     server_sock_fd = socket(AF_UNIX, SOCK_STREAM, 0);
     memset(&domain_sock_addr, 0, sizeof(domain_sock_addr));
     domain_sock_addr.sun_family = AF_UNIX;
+<<<<<<< HEAD
     char* homeDir = getenv("HOME");
     char* file_path = strcat(homeDir, FILE_NAME);
+=======
+    struct passwd *pw = getpwuid(getuid());
+    const char *homedir = pw->pw_dir;
+    char* file_path = strcat((char *) homedir, FILE_NAME);
+>>>>>>> c42af8310924b96e1cc79da7db0981c6e2d2d8f4
     strcpy(domain_sock_addr.sun_path, file_path);
-    bind(server_sock_fd, (struct sockaddr*)&domain_sock_addr, sizeof(domain_sock_addr));
-    listen(server_sock_fd, 10);
+    if (bind(server_sock_fd, (struct sockaddr*)&domain_sock_addr, sizeof(domain_sock_addr)) < 0) {
+        perror("bind failed");
+        exit(EXIT_FAILURE);
+    }
+    if (listen(server_sock_fd, 10) < 0) {
+        perror("listen");
+        exit(EXIT_FAILURE);
+    }
 }
