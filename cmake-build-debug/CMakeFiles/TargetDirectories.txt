@@ -1,4 +1,4 @@
-/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug/CMakeFiles/Client.dir
-/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug/CMakeFiles/Server.dir
+/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/Client.dir
+/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/Server.dir

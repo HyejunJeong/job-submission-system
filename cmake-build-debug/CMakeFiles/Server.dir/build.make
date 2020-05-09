@@ -43,10 +43,10 @@ RM = /home/xgao/bin/clion/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/xgao/Documents/CSE 376/hw4-cse376g11"
+CMAKE_SOURCE_DIR = "/home/xgao/Documents/CSE 376/job-submission-system"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug"
+CMAKE_BINARY_DIR = "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Server.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/Server.dir/flags.make
 
 CMakeFiles/Server.dir/src/server/ClientList.c.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/src/server/ClientList.c.o: ../src/server/ClientList.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Server.dir/src/server/ClientList.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Server.dir/src/server/ClientList.c.o   -c "/home/xgao/Documents/CSE 376/hw4-cse376g11/src/server/ClientList.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Server.dir/src/server/ClientList.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Server.dir/src/server/ClientList.c.o   -c "/home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c"
 
 CMakeFiles/Server.dir/src/server/ClientList.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Server.dir/src/server/ClientList.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/xgao/Documents/CSE 376/hw4-cse376g11/src/server/ClientList.c" > CMakeFiles/Server.dir/src/server/ClientList.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c" > CMakeFiles/Server.dir/src/server/ClientList.c.i
 
 CMakeFiles/Server.dir/src/server/ClientList.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Server.dir/src/server/ClientList.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/xgao/Documents/CSE 376/hw4-cse376g11/src/server/ClientList.c" -o CMakeFiles/Server.dir/src/server/ClientList.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c" -o CMakeFiles/Server.dir/src/server/ClientList.c.s
 
 CMakeFiles/Server.dir/src/server/server.c.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/src/server/server.c.o: ../src/server/server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Server.dir/src/server/server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Server.dir/src/server/server.c.o   -c "/home/xgao/Documents/CSE 376/hw4-cse376g11/src/server/server.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Server.dir/src/server/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Server.dir/src/server/server.c.o   -c "/home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c"
 
 CMakeFiles/Server.dir/src/server/server.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Server.dir/src/server/server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/xgao/Documents/CSE 376/hw4-cse376g11/src/server/server.c" > CMakeFiles/Server.dir/src/server/server.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c" > CMakeFiles/Server.dir/src/server/server.c.i
 
 CMakeFiles/Server.dir/src/server/server.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Server.dir/src/server/server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/xgao/Documents/CSE 376/hw4-cse376g11/src/server/server.c" -o CMakeFiles/Server.dir/src/server/server.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c" -o CMakeFiles/Server.dir/src/server/server.c.s
 
 # Object files for target Server
 Server_OBJECTS = \
@@ -95,7 +95,7 @@ Server: CMakeFiles/Server.dir/src/server/ClientList.c.o
 Server: CMakeFiles/Server.dir/src/server/server.c.o
 Server: CMakeFiles/Server.dir/build.make
 Server: CMakeFiles/Server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable Server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable Server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/Server.dir/clean:
 .PHONY : CMakeFiles/Server.dir/clean
 
 CMakeFiles/Server.dir/depend:
-	cd "/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/xgao/Documents/CSE 376/hw4-cse376g11" "/home/xgao/Documents/CSE 376/hw4-cse376g11" "/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug" "/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug" "/home/xgao/Documents/CSE 376/hw4-cse376g11/cmake-build-debug/CMakeFiles/Server.dir/DependInfo.cmake" --color=$(COLOR)
+	cd "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/xgao/Documents/CSE 376/job-submission-system" "/home/xgao/Documents/CSE 376/job-submission-system" "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug" "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug" "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/Server.dir/DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/Server.dir/depend
 
