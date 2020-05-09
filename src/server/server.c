@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <sys/socket.h>
 #include <string.h>
@@ -6,6 +7,7 @@
 #include <pwd.h>
 #include <stdlib.h>
 #include <poll.h>
+#include <errno.h>
 
 #include "../../include/constants.h"
 #include "../../include/ClientList.h"
@@ -74,7 +76,15 @@ static void handleClient(int clientFd){
    char buffer[BUFFER_SIZE];
    memset(buffer, 0, BUFFER_SIZE);
    recv(clientFd, buffer, BUFFER_SIZE, NULL);
+   // dummy handling
    printf("recieve this from client fd %d: %s\n", clientFd, buffer);
+}
+
+// client closes its connection
+static void closeClient(int clientFd){
+    close(clientFd);
+    LinkedClient* client = getClientByFd(clientFd);
+    removeClient(client);
 }
 
 static void accept_client(){
@@ -89,7 +99,26 @@ static void accept_client(){
         for(int i = 1; i < clientFdsNum + 1; i++){
             // this means this clientfd has sent nothing
             if(fds[i].revents == 0) continue;
-//            if(fd)
+            if(fds[i].revents == POLLIN) handleClient(fds[i].fd);
+            if(fds[i].revents & (POLLRDHUP | POLLERR | POLLNVAL | POLLRDHUP)) closeClient(fds[i].fd);
+        }
+
+        // server fd has a new connection
+        if(fds[0].revents != 0){
+            do{
+                int newClientFd = accept(server_sock_fd, NULL, NULL);
+                if(newClientFd < 0){
+                    if (errno != EWOULDBLOCK){
+                        perror("accept error:");
+                        exit(0);
+                    }else{
+                        break;
+                    }
+                }
+                printf("new client connected with fd %d\n", newClientFd);
+                LinkedClient* client = createNewClient(newClientFd);
+                insertClient(client);
+            }while(true);
         }
 
         int newClientFd = accept(server_sock_fd, NULL, NULL);

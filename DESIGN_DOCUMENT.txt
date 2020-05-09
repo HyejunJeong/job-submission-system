@@ -1,7 +1,11 @@
 Designed document for HW4.
 
+Server Arg, server takes in -j [max jobs] which tells the server how many max jobs can be run at once.
+Default is 10.
+
 LinkedList:
 All the client connections are stored inside a linkedlist structure.
 Each client object holds the client file descriptor. New client connection will be inserted into this linked list when connection is accepted.
 Client that closes the connection will be removed when connection is terminated.
+
 
