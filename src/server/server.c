@@ -44,7 +44,6 @@ int main(int argc, char** argv, char** envp) {
     return 0;
 }
 
-<<<<<<< HEAD
 static void parse_args(int argc, char** argv){
     char c;
     while((c = getopt(argc, argv, "j:")) != -1){
@@ -70,8 +69,6 @@ static void init_pollfd(struct pollfd fds[]){
     }
 }
 
-=======
->>>>>>> c42af8310924b96e1cc79da7db0981c6e2d2d8f4
 static void accept_client(){
 
     do {
@@ -90,29 +87,21 @@ void print_usage(char** argv){
 }
 
 void onExitCallBack (void){
+    printf("deleting the file, please rerun the server\n");
     struct passwd *pw = getpwuid(getuid());
-<<<<<<< HEAD
-    char* homeDir = getenv("HOME");
-=======
     const char *homedir = pw->pw_dir;
-    char* file_path = strcat((char *)homedir, FILE_NAME);
->>>>>>> c42af8310924b96e1cc79da7db0981c6e2d2d8f4
+    const char* file_path = strcat(homedir, FILE_NAME);
     // unlock the domain socket. This will create a process lock otherwise
-    unlink(homeDir);
+    unlink(homedir);
 }
 
 static void create_sock(){
     server_sock_fd = socket(AF_UNIX, SOCK_STREAM, 0);
     memset(&domain_sock_addr, 0, sizeof(domain_sock_addr));
     domain_sock_addr.sun_family = AF_UNIX;
-<<<<<<< HEAD
-    char* homeDir = getenv("HOME");
-    char* file_path = strcat(homeDir, FILE_NAME);
-=======
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
     char* file_path = strcat((char *) homedir, FILE_NAME);
->>>>>>> c42af8310924b96e1cc79da7db0981c6e2d2d8f4
     strcpy(domain_sock_addr.sun_path, file_path);
     if (bind(server_sock_fd, (struct sockaddr*)&domain_sock_addr, sizeof(domain_sock_addr)) < 0) {
         perror("bind failed");
