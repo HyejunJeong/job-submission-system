@@ -7,7 +7,6 @@
 #include <sys/un.h>
 #include <unistd.h>
 #include <pwd.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "../../include/constants.h";
@@ -19,11 +18,7 @@ void onExitCallBack (int status, void* arg);
 
 int main() {
 
-    // registering a call back function on system exit
-    // registering a hook on function exit that deletes the .hw4server_control in home dir
-    typedef void (*FunctionPtr) (int, void*);
-    FunctionPtr functionPtr = &onExitCallBack;
-    on_exit(functionPtr, NULL);
+
 
     // set up the socket
     create_sock();
@@ -43,13 +38,7 @@ static void create_sock(){
     strcpy(server_addr.sun_path, file_path);
     connect(sock_fd, (struct socaddr*)&server_addr, sizeof(server_addr));
 }
-void onExitCallBack (int status, void* arg){
-    struct passwd *pw = getpwuid(getuid());
-    const char *homedir = pw->pw_dir;
-    char* file_path = strcat(homedir, FILE_NAME);
-    // unlock the domain socket. This will create a process lock otherwise
-    unlink(file_path);
-}
+
 
 
 

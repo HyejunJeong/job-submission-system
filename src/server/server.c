@@ -4,6 +4,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 #include <pwd.h>
+#include <stdlib.h>
 
 #include "../../include/constants.h";
 #include "../../include/ClientList.h";
@@ -13,8 +14,15 @@ static struct sockaddr_un domain_sock_addr;
 static void create_sock();
 
 
+void onExitCallBack (void);
 
 int main() {
+
+    // registering a call back function on system exit
+    // registering a hook on function exit that deletes the .hw4server_control in home dir
+    typedef void (*FunctionPtr) (void);
+    FunctionPtr functionPtr = &onExitCallBack;
+    atexit(functionPtr);
 
     // set up the unix domain socket
     create_sock();
@@ -27,12 +35,20 @@ int main() {
 }
 
 
+
 static void accept_client(){
     do {
         int newClientFd = accept(server_sock_fd, NULL, NULL);
     }while(true);
 }
 
+void onExitCallBack (void){
+    struct passwd *pw = getpwuid(getuid());
+    const char *homedir = pw->pw_dir;
+    char* file_path = strcat(homedir, FILE_NAME);
+    // unlock the domain socket. This will create a process lock otherwise
+    unlink(file_path);
+}
 
 static void create_sock(){
     server_sock_fd = socket(AF_UNIX, SOCK_STREAM, 0);
