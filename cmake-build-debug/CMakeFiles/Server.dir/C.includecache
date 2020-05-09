@@ -8,27 +8,11 @@
 
 /home/xgao/Documents/CSE 376/job-submission-system/include/ClientList.h
 
-/home/xgao/Documents/CSE 376/job-submission-system/include/constants.h
-
-/home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c
-stdio.h
--
-sys/socket.h
--
-string.h
--
-sys/un.h
--
-unistd.h
--
-pwd.h
+/home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c
+stddef.h
 -
 stdlib.h
 -
-poll.h
--
-../../include/constants.h
-/home/xgao/Documents/CSE 376/job-submission-system/include/constants.h
 ../../include/ClientList.h
 /home/xgao/Documents/CSE 376/job-submission-system/include/ClientList.h
 

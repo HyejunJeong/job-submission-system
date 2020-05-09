@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <poll.h>
 #include <errno.h>
+#include <fcntl.h>
+
 
 #include "../../include/constants.h"
 #include "../../include/ClientList.h"
@@ -20,6 +22,7 @@ static int maxJobs = 10;
 void onExitCallBack (void);
 void print_usage(char** argv);
 static void parse_args(int argc, char** argv);
+static void handleConnections();
 
 int main(int argc, char** argv, char** envp) {
 
@@ -34,15 +37,7 @@ int main(int argc, char** argv, char** envp) {
     // set up the unix domain socket
     create_sock();
     // start accepting client, it is just like a network socket
-    int newClientFd;
-    if((newClientFd = accept(server_sock_fd, NULL, NULL)) < 0) {
-        perror("accept");
-        exit(EXIT_FAILURE);
-    }
-
-    char buffer[BUFFER_SIZE];
-    int bytes_recieved = recv(newClientFd, buffer, BUFFER_SIZE, 0);
-    printf("%s\n", buffer);
+    handleConnections();
     return 0;
 }
 
@@ -87,14 +82,15 @@ static void closeClient(int clientFd){
     removeClient(client);
 }
 
-static void accept_client(){
-
+static void handleConnections(){
+    // make the server sock none blocking
+     fcntl(server_sock_fd, F_SETFL, O_NONBLOCK);
     do {
         int clientFdsNum = getClientListSize();
         struct pollfd fds[clientFdsNum + 1];
         init_pollfd(fds);
         // hangs here until a client socket sends something
-        int readyFdNum = poll(fds, clientFdsNum + 1, NULL);
+        int readyFdNum = poll(fds, clientFdsNum + 1, -1);
 
         for(int i = 1; i < clientFdsNum + 1; i++){
             // this means this clientfd has sent nothing
@@ -120,8 +116,6 @@ static void accept_client(){
                 insertClient(client);
             }while(true);
         }
-
-        int newClientFd = accept(server_sock_fd, NULL, NULL);
     }while(true);
 }
 

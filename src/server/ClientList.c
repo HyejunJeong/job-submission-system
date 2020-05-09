@@ -57,7 +57,7 @@ LinkedClient* getClientByIndex(int index){
 LinkedClient* createNewClient(int fd){
     Client* client = calloc(sizeof(*client), 1);
     LinkedClient* linkedClient = calloc(sizeof(*linkedClient), 1);
-    client->clientFd = 1;
+    client->clientFd = fd;
     linkedClient->element = client;
     return linkedClient;
 }
