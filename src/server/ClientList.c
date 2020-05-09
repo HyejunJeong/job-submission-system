@@ -61,3 +61,12 @@ LinkedClient* createNewClient(int fd){
     linkedClient->element = client;
     return linkedClient;
 }
+
+LinkedClient* getClientByFd(int fd){
+    LinkedClient* client = clientList.next;
+    while(client != NULL){
+        if(client->element->clientFd == fd) return client;
+        client = client->next;
+    }
+    return NULL;
+}

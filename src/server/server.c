@@ -69,6 +69,14 @@ static void init_pollfd(struct pollfd fds[]){
     }
 }
 
+static void handleClient(int clientFd){
+   LinkedClient* client = getClientByFd(clientFd);
+   char buffer[BUFFER_SIZE];
+   memset(buffer, 0, BUFFER_SIZE);
+   recv(clientFd, buffer, BUFFER_SIZE, NULL);
+   printf("recieve this from client fd %d: %s\n", clientFd, buffer);
+}
+
 static void accept_client(){
 
     do {
@@ -77,6 +85,13 @@ static void accept_client(){
         init_pollfd(fds);
         // hangs here until a client socket sends something
         int readyFdNum = poll(fds, clientFdsNum + 1, NULL);
+
+        for(int i = 1; i < clientFdsNum + 1; i++){
+            // this means this clientfd has sent nothing
+            if(fds[i].revents == 0) continue;
+//            if(fd)
+        }
+
         int newClientFd = accept(server_sock_fd, NULL, NULL);
     }while(true);
 }
@@ -90,7 +105,6 @@ void onExitCallBack (void){
     printf("deleting the file, please rerun the server\n");
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
-    const char* file_path = strcat(homedir, FILE_NAME);
     // unlock the domain socket. This will create a process lock otherwise
     unlink(homedir);
 }

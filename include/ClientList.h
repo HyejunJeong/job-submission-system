@@ -35,4 +35,7 @@ int getClientListSize(void);
 // the root node of the LinkedClient
 extern LinkedClient clientList;
 
+// get client by fd
+LinkedClient* getClientByFd(int fd);
+
 #endif //HW4_CLIENTLIST_H
