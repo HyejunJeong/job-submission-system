@@ -9,6 +9,8 @@
 #include <poll.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 
 #include "../../include/constants.h"
@@ -23,6 +25,7 @@ void onExitCallBack (void);
 void print_usage(char** argv);
 static void parse_args(int argc, char** argv);
 static void handleConnections();
+static void reapChild(void);
 
 int main(int argc, char** argv, char** envp) {
 
@@ -54,6 +57,18 @@ static void parse_args(int argc, char** argv){
     }
 }
 
+// as the name implies
+static void reapChild(void){
+    while(1){
+        siginfo_t infop;
+        memset(&infop, 0 , sizeof(infop));
+        waitid(P_ALL, -1, &infop, WEXITED | WNOHANG);
+        if(!infop.si_pid) break;
+        LinkedJob* job = getJob(infop.si_pid);
+        job->jobStatus = EXITED;
+    }
+}
+
 static void init_pollfd(struct pollfd fds[]){
     memset(fds, 0, sizeof(fds));
     fds[0].fd = server_sock_fd;
@@ -82,6 +97,7 @@ static void closeClient(int clientFd){
     removeClient(client);
 }
 
+
 static void handleConnections(){
     // make the server sock none blocking
      fcntl(server_sock_fd, F_SETFL, O_NONBLOCK);
@@ -91,6 +107,9 @@ static void handleConnections(){
         init_pollfd(fds);
         // hangs here until a client socket sends something
         int readyFdNum = poll(fds, clientFdsNum + 1, -1);
+
+        // reap finished jobs
+        reapChild();
 
         for(int i = 1; i < clientFdsNum + 1; i++){
             // this means this clientfd has sent nothing

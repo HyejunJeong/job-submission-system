@@ -3,8 +3,11 @@
 
 CMakeFiles/Server.dir/src/server/ClientList.c.o
  /home/xgao/Documents/CSE 376/job-submission-system/include/ClientList.h
+ /home/xgao/Documents/CSE 376/job-submission-system/include/constants.h
+ /home/xgao/Documents/CSE 376/job-submission-system/include/protocols.h
  /home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c
 CMakeFiles/Server.dir/src/server/server.c.o
  /home/xgao/Documents/CSE 376/job-submission-system/include/ClientList.h
  /home/xgao/Documents/CSE 376/job-submission-system/include/constants.h
+ /home/xgao/Documents/CSE 376/job-submission-system/include/protocols.h
  /home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c

@@ -8,9 +8,12 @@
 #define true 1
 #define false 0
 
+#define EXITED 1
+#define RUNNING 2
+
 #define BUFFER_SIZE 2048
 
 typedef unsigned char byte;
-const char* FILE_NAME =  "/.hw4server_control";
+#define FILE_NAME   "/.hw4server_control"
 
 #endif //HW4_CONSTANTS_H
