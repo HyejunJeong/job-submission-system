@@ -118,6 +118,10 @@
 			<Option target="Client"/>
 			<Option target="Server"/>
 		</Unit>
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/include/protocols.h">
+			<Option target="Client"/>
+			<Option target="Server"/>
+		</Unit>
 		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/src/client/client.c">
 			<Option target="Client"/>
 		</Unit>
