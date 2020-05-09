@@ -6,8 +6,8 @@
 #include <pwd.h>
 #include <stdlib.h>
 
-#include "../../include/constants.h";
-#include "../../include/ClientList.h";
+#include "../../include/constants.h"
+#include "../../include/ClientList.h"
 
 static int server_sock_fd;
 static struct sockaddr_un domain_sock_addr;
@@ -27,14 +27,17 @@ int main() {
     // set up the unix domain socket
     create_sock();
     // start accepting client, it is just like a network socket
-    int newClientFd = accept(server_sock_fd, NULL, NULL);
+    int newClientFd;
+    if((newClientFd = accept(server_sock_fd, NULL, NULL)) < 0) {
+        perror("accept");
+        exit(EXIT_FAILURE);
+    }
+
     char buffer[BUFFER_SIZE];
     int bytes_recieved = recv(newClientFd, buffer, BUFFER_SIZE, 0);
-    printf(buffer);
+    printf("%s\n", buffer);
     return 0;
 }
-
-
 
 static void accept_client(){
     do {
@@ -45,7 +48,7 @@ static void accept_client(){
 void onExitCallBack (void){
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
-    char* file_path = strcat(homedir, FILE_NAME);
+    char* file_path = strcat((char *)homedir, FILE_NAME);
     // unlock the domain socket. This will create a process lock otherwise
     unlink(file_path);
 }
@@ -56,8 +59,14 @@ static void create_sock(){
     domain_sock_addr.sun_family = AF_UNIX;
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
-    char* file_path = strcat(homedir, FILE_NAME);
+    char* file_path = strcat((char *) homedir, FILE_NAME);
     strcpy(domain_sock_addr.sun_path, file_path);
-    bind(server_sock_fd, (struct sockaddr*)&domain_sock_addr, sizeof(domain_sock_addr));
-    listen(server_sock_fd, 10);
+    if (bind(server_sock_fd, (struct sockaddr*)&domain_sock_addr, sizeof(domain_sock_addr)) < 0) {
+        perror("bind failed");
+        exit(EXIT_FAILURE);
+    }
+    if (listen(server_sock_fd, 10) < 0) {
+        perror("listen");
+        exit(EXIT_FAILURE);
+    }
 }

@@ -9,7 +9,7 @@
 #include <pwd.h>
 #include <stdlib.h>
 
-#include "../../include/constants.h";
+#include "../../include/constants.h"
 
 static void create_sock();
 static int sock_fd;
@@ -17,8 +17,6 @@ struct sockaddr_un server_addr;
 void onExitCallBack (int status, void* arg);
 
 int main() {
-
-
 
     // set up the socket
     create_sock();
@@ -34,9 +32,9 @@ static void create_sock(){
     server_addr.sun_family = AF_UNIX;
     struct passwd *pw = getpwuid(getuid());
     const char *homedir = pw->pw_dir;
-    char* file_path = strcat(homedir, FILE_NAME);
+    char* file_path = strcat((char *)homedir, FILE_NAME);
     strcpy(server_addr.sun_path, file_path);
-    connect(sock_fd, (struct socaddr*)&server_addr, sizeof(server_addr));
+    connect(sock_fd, (struct sockaddr*)&server_addr, sizeof(server_addr));
 }
 
 
