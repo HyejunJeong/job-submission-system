@@ -38,6 +38,13 @@ void removeClient(LinkedClient* linkedClient){
 
     if(currentClient->prev != NULL) currentClient->prev->next = currentClient->next;
     if(currentClient->next != NULL) currentClient->next->prev = currentClient->prev;
+    LinkedJob* job = currentClient->element->LinkedJob;
+    while(job != NULL){
+        LinkedJob* current = job;
+        job = job->next;
+        free(current->element);
+        free(current);
+    }
     free(currentClient->element);
     free(currentClient);
 }
@@ -75,6 +82,7 @@ LinkedClient* getClientByFd(int fd){
 LinkedJob* getJob(pid_t pid){
     for(LinkedClient* client = clientList.next; client != NULL; client = client->next){
         for(LinkedJob* linkedJob = client->element->LinkedJob; linkedJob != NULL; linkedJob = linkedJob->next){
+            if(linkedJob->jobStatus == EXITED) continue;
             if(linkedJob->pid == pid) return linkedJob;
         }
     }

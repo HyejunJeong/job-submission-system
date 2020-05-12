@@ -7,13 +7,19 @@
 
 #include "constants.h"
 
+typedef enum CommandType {
+        SUBMIT_JOB = 0,
+        LIST_JOB = 1,
+        KILL_JOB = 2
+} CommandType;
+
 // you will need to malloc this struct to size of struct + envp size + the argv size to accommodate this
 typedef struct Job{
     int maxMemory;
     int maxTime;
     int priority;
     int envpSize; // use to extract envp
-    int argcSize; // use to extract argv
+    int argvSize; // use to extract argv
     int argc; // argc of the job
     byte envp[0]; // envp of the job
     byte argv[0]; // argv of the job

@@ -10,6 +10,7 @@
 
 #define EXITED 1
 #define RUNNING 2
+#define KILLED 3
 
 #define BUFFER_SIZE 2048
 

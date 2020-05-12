@@ -11,6 +11,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/time.h>
+#include <sys/resource.h>
 
 
 #include "../../include/constants.h"
@@ -26,6 +28,9 @@ void print_usage(char** argv);
 static void parse_args(int argc, char** argv);
 static void handleConnections();
 static void reapChild(void);
+static void submitJob(LinkedClient* client, Job* job);
+static void listJob(LinkedClient* client);
+static void killJob(pid_t pid);
 
 int main(int argc, char** argv, char** envp) {
 
@@ -66,6 +71,9 @@ static void reapChild(void){
         if(!infop.si_pid) break;
         LinkedJob* job = getJob(infop.si_pid);
         job->jobStatus = EXITED;
+        char buffer[BUFFER_SIZE];
+        sprintf(buffer, "Job %d finished\n", job->pid);
+        send(job->client->clientFd, buffer, BUFFER_SIZE, NULL);
     }
 }
 
@@ -81,13 +89,91 @@ static void init_pollfd(struct pollfd fds[]){
     }
 }
 
+static Job* deserializeJob(void* startingAddr, int sizeOfJob){
+    Job* job = calloc(sizeOfJob, 1);
+
+    int maxMemory;
+    memcpy((void*) &maxMemory, startingAddr, 4);
+    startingAddr += 4;
+    job->maxMemory = maxMemory;
+
+    int maxTime;
+    memcpy((void*) &maxTime, startingAddr, 4);
+    startingAddr += 4;
+    job->maxTime = maxTime;
+
+    int priority;
+    memcpy((void*) &priority, startingAddr, 4);
+    startingAddr += 4;
+    job->priority;
+
+    int envpSize;
+    memcpy((void*) &envpSize, startingAddr, 4);
+    startingAddr += 4;
+    job->envpSize = envpSize;
+
+    int argvSize;
+    memcpy((void*) &argvSize, startingAddr, 4);
+    startingAddr += 4;
+    job->argvSize = argvSize;
+
+    int argc;
+    memcpy((void*) &argc, startingAddr, 4);
+    startingAddr += 4;
+    job->argc = argc;
+
+    memcpy((void*) &(job->envp), startingAddr, envpSize);
+    startingAddr += envpSize;
+
+    memcpy((void*) ((&(job->envp)) + envpSize), startingAddr, argvSize);
+    return job;
+
+}
+
 static void handleClient(int clientFd){
    LinkedClient* client = getClientByFd(clientFd);
-   char buffer[BUFFER_SIZE];
-   memset(buffer, 0, BUFFER_SIZE);
-   recv(clientFd, buffer, BUFFER_SIZE, NULL);
-   // dummy handling
-   printf("recieve this from client fd %d: %s\n", clientFd, buffer);
+   byte firstByte = '\0';
+   recv(clientFd, &firstByte, 1, NULL);
+   switch(firstByte){
+       case SUBMIT_JOB:{
+           int msgSize = 0;
+           recv(clientFd, (void*) &msgSize, sizeof(int), NULL);
+           byte buffer[msgSize];
+           Job* job = deserializeJob(buffer, msgSize);
+           submitJob(client, job);
+           break;
+       }
+       case LIST_JOB:{
+           listJob(client);
+           break;
+       }
+       case KILL_JOB:{
+           int jobPid;
+           recv(clientFd, (void*) &jobPid, 4, NULL);
+           killJob(jobPid);
+           break;
+       }
+
+       default:{
+           send(clientFd, "command not recognize\n", BUFFER_SIZE, NULL);
+           break;
+       }
+   }
+}
+
+static void listJob(LinkedClient* client){
+    char buffer[20480]; // will not be enough if clients has too many jobs to print but ... yeah.... whatever.
+
+    int count = 0;
+    if(client->element->LinkedJob == NULL) sprintf(buffer, "client has no jobs\n");
+    else{
+        for(LinkedJob* job = client->element->LinkedJob; job != NULL; job = job->next){
+            sprintf((char*)&buffer[count], "Job pid: %d, program name: %s\n", job->pid, (char*) ((&(job->element->envp)) + job->element->envpSize));
+            int strLen = strlen(buffer[count]);
+            count += strLen + 1;
+        }
+    }
+    send(client->element->clientFd, buffer, 20480, NULL);
 }
 
 // client closes its connection
@@ -168,4 +254,87 @@ static void create_sock(){
         perror("listen");
         exit(EXIT_FAILURE);
     }
+}
+
+
+static void runJob(Job* job){
+    char** envp = calloc(sizeof(void*), 46); // as far as i can tell, there are 46 enviorment varibles on linux. There might be more or less but.... yeah.... whatever
+    int i = 0;
+    int envpSize = 0;
+    char* envpPtr = &(job->envp);
+    while(envpSize < job->envpSize){
+        int bufferSize = strlen(envpPtr) + 1;
+        char* string = calloc(bufferSize, 1);
+        strcpy(string, envpPtr); // bad idea because of buffer over flow but .... yeah.. whatever
+        envp[i] = string;
+        i++;
+        envpSize += bufferSize;
+        envpPtr += bufferSize;
+    }
+
+    char** argv = calloc(sizeof(void*), job->argc);
+    int j = 0;
+    int argvSize = 0;
+    char* argvPtr = (&(job->envp)) + job->envpSize;
+    while(argvSize < job->argvSize){
+        int bufferSize = strlen(argvPtr) + 1;
+        char* string = calloc(bufferSize, 1);
+        strcpy(string, argvPtr); // bad idea because of buffer over flow but .... yeah.. whatever
+        argv[j] = string;
+        j++;
+        argvSize += bufferSize;
+        argvPtr += bufferSize;
+    }
+    execve(argv[1], argv, envp);
+    exit(1); // failed
+}
+
+static void submitJob(LinkedClient* client, Job* job){
+    LinkedJob* linkedJob = calloc(sizeof(*linkedJob), 1);
+    pid_t pid = fork();
+
+    if(pid < 0){
+        perror("fork failed");
+        exit(0);
+    }
+
+    if(pid > 0){
+        struct rlimit rl;
+        getrlimit(RLIMIT_AS, &rl);
+
+        // set max memeory
+        rl.rlim_cur = job->maxMemory;
+        setrlimit(RLIMIT_AS, &rl);
+
+        // set the max cpu time
+        getrlimit(RLIMIT_CPU, &rl);
+        rl.rlim_cur = job->maxTime;
+        setrlimit(RLIMIT_CPU, &rl);
+
+        // set the priority
+        getrlimit(RLIMIT_NICE, &rl);
+        rl.rlim_cur = job->priority;
+        setrlimit(RLIMIT_NICE, &rl);
+
+        runJob(job);
+    }
+
+    linkedJob->pid = pid;
+    linkedJob->client = client;
+    linkedJob->jobStatus = RUNNING;
+    linkedJob->element = job;
+    if(client->element->LinkedJob == NULL){
+        client->element->LinkedJob = linkedJob;
+        return;
+    }
+
+    LinkedJob* lastLinkedJob = NULL;
+    for(lastLinkedJob = client->element->LinkedJob; lastLinkedJob->next != NULL; lastLinkedJob = lastLinkedJob->next);
+    lastLinkedJob->next = linkedJob;
+    send(client->element->clientFd, "Job successfully started\n", BUFFER_SIZE, NULL);
+    return;
+}
+
+static void killJob(pid_t pid){
+    kill(pid, 9);
 }
