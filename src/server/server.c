@@ -89,6 +89,7 @@ static void init_pollfd(struct pollfd fds[]){
     }
 }
 
+// starting address is the starting address of the job in the recv buffer.
 static Job* deserializeJob(void* startingAddr, int sizeOfJob){
     Job* job = calloc(sizeOfJob, 1);
 
