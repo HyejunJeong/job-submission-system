@@ -152,7 +152,6 @@ static void handleClient(int clientFd){
    recv(clientFd, &firstByte, 1, NULL);
    switch(firstByte){
        case SUBMIT_JOB:{
-           printf("SUBMIT\n");
            int msgSize = 0;
 
            recv(clientFd, (void*) &msgSize, sizeof(int), NULL);
@@ -164,14 +163,10 @@ static void handleClient(int clientFd){
            break;
        }
        case LIST_JOB:{
-           printf("LIST\n");
-
            listJob(client);
            break;
        }
        case KILL_JOB:{
-           printf("KILL\n");
-
            int jobPid;
            recv(clientFd, (void*) &jobPid, 4, NULL);
            print_buf(&jobPid, 10);
