@@ -53,6 +53,8 @@ sys/time.h
 -
 sys/resource.h
 -
+signal.h
+-
 ../../include/constants.h
 /home/xgao/Documents/CSE 376/job-submission-system/include/constants.h
 ../../include/ClientList.h
