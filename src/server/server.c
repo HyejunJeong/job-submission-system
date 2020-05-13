@@ -30,7 +30,7 @@ static void handleConnections();
 static void reapChild(void);
 static void submitJob(LinkedClient* client, Job* job);
 static void listJob(LinkedClient* client);
-static void killJob(pid_t pid);
+static void killJob(int clientFd, pid_t pid);
 
 int main(int argc, char** argv, char** envp) {
 
@@ -70,6 +70,7 @@ static void reapChild(void){
         waitid(P_ALL, -1, &infop, WEXITED | WNOHANG);
         if(!infop.si_pid) break;
         LinkedJob* job = getJob(infop.si_pid);
+        if(job == NULL) continue;
         job->jobStatus = EXITED;
         char buffer[BUFFER_SIZE];
         sprintf(buffer, "Job %d finished\n", job->pid);
@@ -151,7 +152,7 @@ static void handleClient(int clientFd){
        case KILL_JOB:{
            int jobPid;
            recv(clientFd, (void*) &jobPid, 4, NULL);
-           killJob(jobPid);
+           killJob(clientFd, jobPid);
            break;
        }
 
@@ -202,7 +203,7 @@ static void handleConnections(){
             // this means this clientfd has sent nothing
             if(fds[i].revents == 0) continue;
             if(fds[i].revents == POLLIN) handleClient(fds[i].fd);
-            if(fds[i].revents & (POLLRDHUP | POLLERR | POLLNVAL | POLLRDHUP)) closeClient(fds[i].fd);
+            if(fds[i].revents & (POLLHUP | POLLERR | POLLNVAL /*| POLLRDHUP*/)) closeClient(fds[i].fd);
         }
 
         // server fd has a new connection
@@ -313,9 +314,7 @@ static void submitJob(LinkedClient* client, Job* job){
         setrlimit(RLIMIT_CPU, &rl);
 
         // set the priority
-        getrlimit(RLIMIT_NICE, &rl);
-        rl.rlim_cur = job->priority;
-        setrlimit(RLIMIT_NICE, &rl);
+        setpriority(PRIO_PROCESS, getpid(), job->priority);
 
         runJob(job);
     }
@@ -336,6 +335,14 @@ static void submitJob(LinkedClient* client, Job* job){
     return;
 }
 
-static void killJob(pid_t pid){
+static void killJob(int clientfd, pid_t pid){
+    Job* job = getJob(pid);
+    if(job == NULL) {
+        send(clientfd, "No such pid found\n", BUFFER_SIZE, NULL);
+        return;
+    }
     kill(pid, 9);
+    char buffer[BUFFER_SIZE];
+    sprintf(buffer, "pid %d killed\n", pid);
+    send(clientfd, buffer, BUFFER_SIZE, NULL);
 }

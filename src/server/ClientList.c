@@ -82,7 +82,7 @@ LinkedClient* getClientByFd(int fd){
 LinkedJob* getJob(pid_t pid){
     for(LinkedClient* client = clientList.next; client != NULL; client = client->next){
         for(LinkedJob* linkedJob = client->element->LinkedJob; linkedJob != NULL; linkedJob = linkedJob->next){
-            if(linkedJob->jobStatus == EXITED) continue;
+            if(linkedJob->jobStatus == EXITED || linkedJob->jobStatus == KILLED) continue;
             if(linkedJob->pid == pid) return linkedJob;
         }
     }
