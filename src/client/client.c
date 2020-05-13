@@ -17,7 +17,7 @@ static void create_sock();
 void print_buf(unsigned char *buf, int len);
 void print_usage();
 int submit(unsigned char buffer[BUFFER_SIZE], char **envp);
-int get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp);
+void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp);
 
 static int sock_fd;
 struct sockaddr_un server_addr;
@@ -25,7 +25,7 @@ struct sockaddr_un server_addr;
 void print_usage(){
     printf("Usage: submit, list, kill\n");
     exit(0);
-}s
+}
 
 // prepare the job buffer upon submit cmd entered, returns joblen
 int submit(unsigned char buffer[BUFFER_SIZE], char **envp) {
@@ -62,15 +62,23 @@ int submit(unsigned char buffer[BUFFER_SIZE], char **envp) {
         }
         argv[argc] = NULL;
 
+        char temp[MAXLINE];
+
         // prompt the user to enter and get maxmem, maxtime, priority
         printf("(byte) max_mem_to_consume=");
-        scanf("%d", &mem);
+        fgets(temp, sizeof(temp)-1, stdin);
+        sscanf(temp, "%d", &mem);
+        memset(temp, 0 , MAXLINE);
 
         printf("(sec) max_time_to_run=");
-        scanf("%d", &time);
+        fgets(temp, sizeof(temp)-1, stdin);
+        sscanf(temp, "%d", &time);
+        memset(temp, 0 , MAXLINE);
 
         printf("priority=");
-        scanf("%d", &prior);
+        fgets(temp, sizeof(temp)-1, stdin);
+        sscanf(temp, "%d", &prior);
+        memset(temp, 0 , MAXLINE);
 
         // copy mem, time, priority, envplen, argvlen, argc, envp, argc in order
         memcpy(buffer, &mem, sizeof(int));
@@ -125,7 +133,7 @@ void print_buf(unsigned char *buf, int len) {
 // check if user's cmd matches one of four (submit, list, kill, exit),
 // parse cmd_type to 1, 2, 3 respectively
 // prepare the packet header
-int get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
+void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
     int cmd_type = 0;
     int msglen = 0, joblen = 0;
     unsigned char job[BUFFER_SIZE];
@@ -161,22 +169,24 @@ int get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
     else if (strcmp(cmd, "kill") == 0) {
         cmd_type = 3;
         int jobpid = 0;
+        char temp[MAXLINE];
 
         msglen = 2 * sizeof(int); // one for cmd_type, another for pid
 
         // prompt the user to enter jobpid to kill
-        printf("[kill] >> jobpid=");
-        scanf("%d", &jobpid);
+        printf("jobpid=");
+        fgets(temp, sizeof(temp)-1, stdin);
+        sscanf(temp, "%d", &jobpid);
 
         // copy cmd_type and jobpid to packet
         memcpy(packet, &cmd_type, sizeof(int));
         memcpy(packet+sizeof(int), &jobpid, sizeof(int));
+        //print_buf(packet, msglen);
     }
     else if (strcmp(cmd, "exit") == 0) {
         exit(0);
     }
-
-    return msglen;
+    int sent_bytes = send(sock_fd, packet, msglen, 0);
 }
 
 static void create_sock(){
@@ -194,7 +204,10 @@ int main(int argc, char** argv, char** envp) {
     char cmdline[MAXLINE];
     unsigned char packet[BUFFER_SIZE];
     int msglen = 0, received_bytes = 0;
-    char recv_buffer[BUFFER_SIZE];
+    char recv_buffer[RECV_BUFF_SIZE];
+
+    // set up the socket
+    create_sock();
 
     while(1) {
         printf(">> ");
@@ -206,20 +219,14 @@ int main(int argc, char** argv, char** envp) {
             }
 
             // prepare the packet
-            msglen = get_cmd_type(cmdline, &packet[0], envp);
-            print_buf(&packet[0], msglen);
-
-            // set up the socket
-            create_sock();
-
-            int sent_bytes = send(sock_fd, packet, msglen, 0);
+            get_cmd_type(cmdline, &packet[0], envp);
         }
 
-//        if((received_bytes = recv(sock_fd, recv_buffer, RECV_BUFF_SIZE, 0)) < 0) {
-//            perror("receiving data");
-//            exit(1);
-//        }
-//        printf("%s\n", recv_buffer);
+        if((received_bytes = recv(sock_fd, recv_buffer, RECV_BUFF_SIZE, 0)) < 0) {
+            perror("receiving data");
+            exit(1);
+        }
+        printf("%s", recv_buffer);
     }
 }
 

@@ -8,9 +8,9 @@
 #include "constants.h"
 
 typedef enum CommandType {
-        SUBMIT_JOB = 0,
-        LIST_JOB = 1,
-        KILL_JOB = 2
+        SUBMIT_JOB = 1,
+        LIST_JOB = 2,
+        KILL_JOB = 3
 } CommandType;
 
 // you will need to malloc this struct to size of struct + envp size + the argv size to accommodate this

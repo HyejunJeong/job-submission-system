@@ -1,6 +1,6 @@
-The system is: Linux - 5.6.8-300.fc32.x86_64 - x86_64
+The system is: Darwin - 19.4.0 - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: /usr/bin/cc 
+Compiler: /Library/Developer/CommandLineTools/usr/bin/cc 
 Build flags: 
 Id flags:  
 
@@ -10,206 +10,133 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/a.out"
+The C compiler identification is AppleClang, found in "/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/a.out"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_84e7e/fast && /usr/bin/gmake -f CMakeFiles/cmTC_84e7e.dir/build.make CMakeFiles/cmTC_84e7e.dir/build
-gmake[1]: Entering directory '/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_84e7e.dir/testCCompiler.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_84e7e.dir/testCCompiler.c.o   -c "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c"
-Linking C executable cmTC_84e7e
-/home/xgao/bin/clion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_84e7e.dir/link.txt --verbose=1
-/usr/bin/cc      CMakeFiles/cmTC_84e7e.dir/testCCompiler.c.o  -o cmTC_84e7e 
-gmake[1]: Leaving directory '/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp'
+Run Build Command(s):/usr/bin/make cmTC_3a607/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_3a607.dir/build.make CMakeFiles/cmTC_3a607.dir/build
+Building C object CMakeFiles/cmTC_3a607.dir/testCCompiler.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/cmTC_3a607.dir/testCCompiler.c.o   -c /Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_3a607
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3a607.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTC_3a607.dir/testCCompiler.c.o  -o cmTC_3a607 
 
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_347c8/fast && /usr/bin/gmake -f CMakeFiles/cmTC_347c8.dir/build.make CMakeFiles/cmTC_347c8.dir/build
-gmake[1]: Entering directory '/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc   -v -o CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o   -c /home/xgao/bin/clion/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCCompilerABI.c
-Using built-in specs.
-COLLECT_GCC=/usr/bin/cc
-OFFLOAD_TARGET_NAMES=nvptx-none
-OFFLOAD_TARGET_DEFAULT=1
-Target: x86_64-redhat-linux
-Configured with: ../configure --enable-bootstrap --enable-languages=c,c++,fortran,objc,obj-c++,ada,go,d,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-shared --enable-threads=posix --enable-checking=release --enable-multilib --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --with-linker-hash-style=gnu --enable-plugin --enable-initfini-array --with-isl --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux
+Run Build Command(s):/usr/bin/make cmTC_ad1a2/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_ad1a2.dir/build.make CMakeFiles/cmTC_ad1a2.dir/build
+Building C object CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o
+/Library/Developer/CommandLineTools/usr/bin/cc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -v -Wl,-v -o CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o   -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.16/Modules/CMakeCCompilerABI.c
+Apple clang version 11.0.3 (clang-1103.0.32.29)
+Target: x86_64-apple-darwin19.4.0
 Thread model: posix
-Supported LTO compression algorithms: zlib zstd
-gcc version 10.0.1 20200430 (Red Hat 10.0.1-0.13) (GCC) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- /usr/libexec/gcc/x86_64-redhat-linux/10/cc1 -quiet -v /home/xgao/bin/clion/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o -version -o /tmp/cc0XySX2.s
-GNU C17 (GCC) version 10.0.1 20200430 (Red Hat 10.0.1-0.13) (x86_64-redhat-linux)
-	compiled by GNU C version 10.0.1 20200430 (Red Hat 10.0.1-0.13), GMP version 6.1.2, MPFR version 4.0.2-p7, MPC version 1.1.0, isl version isl-0.16.1-GMP
-
-GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/10/include-fixed"
-ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/10/../../../../x86_64-redhat-linux/include"
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
+ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple x86_64-apple-macosx10.15.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mthread-model posix -mframe-pointer=all -fno-strict-return -masm-verbose -munwind-tables -target-sdk-version=10.15.4 -target-cpu penryn -dwarf-column-info -debugger-tuning=lldb -target-linker-version 556.5 -v -coverage-notes-file /Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.gcno -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/11.0.3 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-objc-signed-char-bool-implicit-int-conversion -Wno-extra-semi-stmt -Wno-quoted-include-in-framework-header -fdebug-compilation-dir /Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fobjc-runtime=macosx-10.15.0 -fmax-type-align=16 -fdiagnostics-show-option -o CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o -x c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.16/Modules/CMakeCCompilerABI.c
+clang -cc1 version 11.0.3 (clang-1103.0.32.29) default target x86_64-apple-darwin19.4.0
+ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/local/include"
+ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/Library/Frameworks"
 #include "..." search starts here:
 #include <...> search starts here:
- /usr/lib/gcc/x86_64-redhat-linux/10/include
- /usr/local/include
- /usr/include
+ /Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include
+ /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include
+ /Library/Developer/CommandLineTools/usr/include
+ /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks (framework directory)
 End of search list.
-GNU C17 (GCC) version 10.0.1 20200430 (Red Hat 10.0.1-0.13) (x86_64-redhat-linux)
-	compiled by GNU C version 10.0.1 20200430 (Red Hat 10.0.1-0.13), GMP version 6.1.2, MPFR version 4.0.2-p7, MPC version 1.1.0, isl version isl-0.16.1-GMP
-
-GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-Compiler executable checksum: 6a3a175c409542cf73b0fa2a55826c1d
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- as -v --64 -o CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o /tmp/cc0XySX2.s
-GNU assembler version 2.34 (x86_64-redhat-linux) using BFD version version 2.34-2.fc32
-COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/10/:/usr/libexec/gcc/x86_64-redhat-linux/10/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/10/:/usr/lib/gcc/x86_64-redhat-linux/
-LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/10/:/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/10/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
-Linking C executable cmTC_347c8
-/home/xgao/bin/clion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_347c8.dir/link.txt --verbose=1
-/usr/bin/cc     -v CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o  -o cmTC_347c8 
-Using built-in specs.
-COLLECT_GCC=/usr/bin/cc
-COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/10/lto-wrapper
-OFFLOAD_TARGET_NAMES=nvptx-none
-OFFLOAD_TARGET_DEFAULT=1
-Target: x86_64-redhat-linux
-Configured with: ../configure --enable-bootstrap --enable-languages=c,c++,fortran,objc,obj-c++,ada,go,d,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-shared --enable-threads=posix --enable-checking=release --enable-multilib --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --with-linker-hash-style=gnu --enable-plugin --enable-initfini-array --with-isl --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux
+Linking C executable cmTC_ad1a2
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ad1a2.dir/link.txt --verbose=1
+/Library/Developer/CommandLineTools/usr/bin/cc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o  -o cmTC_ad1a2 
+Apple clang version 11.0.3 (clang-1103.0.32.29)
+Target: x86_64-apple-darwin19.4.0
 Thread model: posix
-Supported LTO compression algorithms: zlib zstd
-gcc version 10.0.1 20200430 (Red Hat 10.0.1-0.13) (GCC) 
-COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/10/:/usr/libexec/gcc/x86_64-redhat-linux/10/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/10/:/usr/lib/gcc/x86_64-redhat-linux/
-LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/10/:/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/10/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_347c8' '-mtune=generic' '-march=x86-64'
- /usr/libexec/gcc/x86_64-redhat-linux/10/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/10/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/10/lto-wrapper -plugin-opt=-fresolution=/tmp/ccp6IGIq.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_347c8 /usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/10/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../.. CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-redhat-linux/10/crtend.o /usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_347c8' '-mtune=generic' '-march=x86-64'
-gmake[1]: Leaving directory '/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp'
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.15.0 10.15.4 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -o cmTC_ad1a2 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/lib/darwin/libclang_rt.osx.a
+@(#)PROGRAM:ld  PROJECT:ld64-556.5
+BUILD 19:04:29 Mar  6 2020
+configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
+Library search paths:
+	/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib
+Framework search paths:
+	/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/
 
 
 
 Parsed C implicit include dir info from above output: rv=done
   found start of include info
   found start of implicit include info
-    add: [/usr/lib/gcc/x86_64-redhat-linux/10/include]
-    add: [/usr/local/include]
-    add: [/usr/include]
+    add: [/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include]
+    add: [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include]
+    add: [/Library/Developer/CommandLineTools/usr/include]
   end of search list found
-  collapse include dir [/usr/lib/gcc/x86_64-redhat-linux/10/include] ==> [/usr/lib/gcc/x86_64-redhat-linux/10/include]
-  collapse include dir [/usr/local/include] ==> [/usr/local/include]
-  collapse include dir [/usr/include] ==> [/usr/include]
-  implicit include dirs: [/usr/lib/gcc/x86_64-redhat-linux/10/include;/usr/local/include;/usr/include]
+  collapse include dir [/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include] ==> [/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include]
+  collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include]
+  collapse include dir [/Library/Developer/CommandLineTools/usr/include] ==> [/Library/Developer/CommandLineTools/usr/include]
+  implicit include dirs: [/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include;/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include;/Library/Developer/CommandLineTools/usr/include]
 
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_347c8/fast && /usr/bin/gmake -f CMakeFiles/cmTC_347c8.dir/build.make CMakeFiles/cmTC_347c8.dir/build]
-  ignore line: [gmake[1]: Entering directory '/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o   -c /home/xgao/bin/clion/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCCompilerABI.c]
-  ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/cc]
-  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
-  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
-  ignore line: [Target: x86_64-redhat-linux]
-  ignore line: [Configured with: ../configure --enable-bootstrap --enable-languages=c c++ fortran objc obj-c++ ada go d lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-shared --enable-threads=posix --enable-checking=release --enable-multilib --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --with-linker-hash-style=gnu --enable-plugin --enable-initfini-array --with-isl --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux]
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_ad1a2/fast && /Library/Developer/CommandLineTools/usr/bin/make -f CMakeFiles/cmTC_ad1a2.dir/build.make CMakeFiles/cmTC_ad1a2.dir/build]
+  ignore line: [Building C object CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/Library/Developer/CommandLineTools/usr/bin/cc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -v -Wl -v -o CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o   -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.16/Modules/CMakeCCompilerABI.c]
+  ignore line: [Apple clang version 11.0.3 (clang-1103.0.32.29)]
+  ignore line: [Target: x86_64-apple-darwin19.4.0]
   ignore line: [Thread model: posix]
-  ignore line: [Supported LTO compression algorithms: zlib zstd]
-  ignore line: [gcc version 10.0.1 20200430 (Red Hat 10.0.1-0.13) (GCC) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/libexec/gcc/x86_64-redhat-linux/10/cc1 -quiet -v /home/xgao/bin/clion/bin/cmake/linux/share/cmake-3.16/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o -version -o /tmp/cc0XySX2.s]
-  ignore line: [GNU C17 (GCC) version 10.0.1 20200430 (Red Hat 10.0.1-0.13) (x86_64-redhat-linux)]
-  ignore line: [	compiled by GNU C version 10.0.1 20200430 (Red Hat 10.0.1-0.13)  GMP version 6.1.2  MPFR version 4.0.2-p7  MPC version 1.1.0  isl version isl-0.16.1-GMP]
-  ignore line: []
-  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/10/include-fixed"]
-  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/10/../../../../x86_64-redhat-linux/include"]
+  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
+  ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
+  ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple x86_64-apple-macosx10.15.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mthread-model posix -mframe-pointer=all -fno-strict-return -masm-verbose -munwind-tables -target-sdk-version=10.15.4 -target-cpu penryn -dwarf-column-info -debugger-tuning=lldb -target-linker-version 556.5 -v -coverage-notes-file /Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.gcno -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/11.0.3 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-objc-signed-char-bool-implicit-int-conversion -Wno-extra-semi-stmt -Wno-quoted-include-in-framework-header -fdebug-compilation-dir /Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -fmessage-length 0 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fobjc-runtime=macosx-10.15.0 -fmax-type-align=16 -fdiagnostics-show-option -o CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o -x c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.16/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang -cc1 version 11.0.3 (clang-1103.0.32.29) default target x86_64-apple-darwin19.4.0]
+  ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/Library/Frameworks"]
   ignore line: [#include "..." search starts here:]
   ignore line: [#include <...> search starts here:]
-  ignore line: [ /usr/lib/gcc/x86_64-redhat-linux/10/include]
-  ignore line: [ /usr/local/include]
-  ignore line: [ /usr/include]
+  ignore line: [ /Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include]
+  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include]
+  ignore line: [ /Library/Developer/CommandLineTools/usr/include]
+  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks (framework directory)]
   ignore line: [End of search list.]
-  ignore line: [GNU C17 (GCC) version 10.0.1 20200430 (Red Hat 10.0.1-0.13) (x86_64-redhat-linux)]
-  ignore line: [	compiled by GNU C version 10.0.1 20200430 (Red Hat 10.0.1-0.13)  GMP version 6.1.2  MPFR version 4.0.2-p7  MPC version 1.1.0  isl version isl-0.16.1-GMP]
-  ignore line: []
-  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [Compiler executable checksum: 6a3a175c409542cf73b0fa2a55826c1d]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ as -v --64 -o CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o /tmp/cc0XySX2.s]
-  ignore line: [GNU assembler version 2.34 (x86_64-redhat-linux) using BFD version version 2.34-2.fc32]
-  ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/10/:/usr/libexec/gcc/x86_64-redhat-linux/10/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/10/:/usr/lib/gcc/x86_64-redhat-linux/]
-  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/10/:/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/10/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [Linking C executable cmTC_347c8]
-  ignore line: [/home/xgao/bin/clion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_347c8.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc     -v CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o  -o cmTC_347c8 ]
-  ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/cc]
-  ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/10/lto-wrapper]
-  ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
-  ignore line: [OFFLOAD_TARGET_DEFAULT=1]
-  ignore line: [Target: x86_64-redhat-linux]
-  ignore line: [Configured with: ../configure --enable-bootstrap --enable-languages=c c++ fortran objc obj-c++ ada go d lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-shared --enable-threads=posix --enable-checking=release --enable-multilib --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --with-linker-hash-style=gnu --enable-plugin --enable-initfini-array --with-isl --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux]
+  ignore line: [Linking C executable cmTC_ad1a2]
+  ignore line: [/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ad1a2.dir/link.txt --verbose=1]
+  ignore line: [/Library/Developer/CommandLineTools/usr/bin/cc   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl -search_paths_first -Wl -headerpad_max_install_names  -v -Wl -v CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o  -o cmTC_ad1a2 ]
+  ignore line: [Apple clang version 11.0.3 (clang-1103.0.32.29)]
+  ignore line: [Target: x86_64-apple-darwin19.4.0]
   ignore line: [Thread model: posix]
-  ignore line: [Supported LTO compression algorithms: zlib zstd]
-  ignore line: [gcc version 10.0.1 20200430 (Red Hat 10.0.1-0.13) (GCC) ]
-  ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/10/:/usr/libexec/gcc/x86_64-redhat-linux/10/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/10/:/usr/lib/gcc/x86_64-redhat-linux/]
-  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/10/:/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/10/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_347c8' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/libexec/gcc/x86_64-redhat-linux/10/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/10/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/10/lto-wrapper -plugin-opt=-fresolution=/tmp/ccp6IGIq.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_347c8 /usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/10/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../.. CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-redhat-linux/10/crtend.o /usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crtn.o]
-    arg [/usr/libexec/gcc/x86_64-redhat-linux/10/collect2] ==> ignore
-    arg [-plugin] ==> ignore
-    arg [/usr/libexec/gcc/x86_64-redhat-linux/10/liblto_plugin.so] ==> ignore
-    arg [-plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/10/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccp6IGIq.res] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
-    arg [-plugin-opt=-pass-through=-lc] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
-    arg [--build-id] ==> ignore
-    arg [--no-add-needed] ==> ignore
-    arg [--eh-frame-hdr] ==> ignore
-    arg [--hash-style=gnu] ==> ignore
-    arg [-m] ==> ignore
-    arg [elf_x86_64] ==> ignore
-    arg [-dynamic-linker] ==> ignore
-    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
+  link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -platform_version macos 10.15.0 10.15.4 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -o cmTC_ad1a2 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/lib/darwin/libclang_rt.osx.a]
+    arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
+    arg [-demangle] ==> ignore
+    arg [-lto_library] ==> ignore, skip following value
+    arg [/Library/Developer/CommandLineTools/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+    arg [-dynamic] ==> ignore
+    arg [-arch] ==> ignore
+    arg [x86_64] ==> ignore
+    arg [-platform_version] ==> ignore
+    arg [macos] ==> ignore
+    arg [10.15.0] ==> ignore
+    arg [10.15.4] ==> ignore
+    arg [-syslibroot] ==> ignore
+    arg [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_347c8] ==> ignore
-    arg [/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crt1.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crti.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-redhat-linux/10/crtbegin.o] ==> ignore
-    arg [-L/usr/lib/gcc/x86_64-redhat-linux/10] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/10]
-    arg [-L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64]
-    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
-    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
-    arg [-L/usr/lib/gcc/x86_64-redhat-linux/10/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/10/../../..]
-    arg [CMakeFiles/cmTC_347c8.dir/CMakeCCompilerABI.c.o] ==> ignore
-    arg [-lgcc] ==> lib [gcc]
-    arg [--push-state] ==> ignore
-    arg [--as-needed] ==> ignore
-    arg [-lgcc_s] ==> lib [gcc_s]
-    arg [--pop-state] ==> ignore
-    arg [-lc] ==> lib [c]
-    arg [-lgcc] ==> lib [gcc]
-    arg [--push-state] ==> ignore
-    arg [--as-needed] ==> ignore
-    arg [-lgcc_s] ==> lib [gcc_s]
-    arg [--pop-state] ==> ignore
-    arg [/usr/lib/gcc/x86_64-redhat-linux/10/crtend.o] ==> ignore
-    arg [/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64/crtn.o] ==> ignore
-  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/10] ==> [/usr/lib/gcc/x86_64-redhat-linux/10]
-  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64] ==> [/usr/lib64]
-  collapse library dir [/lib/../lib64] ==> [/lib64]
-  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
-  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/10/../../..] ==> [/usr/lib]
-  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
-  implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/10;/usr/lib64;/lib64;/usr/lib]
-  implicit fwks: []
+    arg [cmTC_ad1a2] ==> ignore
+    arg [-search_paths_first] ==> ignore
+    arg [-headerpad_max_install_names] ==> ignore
+    arg [-v] ==> ignore
+    arg [CMakeFiles/cmTC_ad1a2.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lSystem] ==> lib [System]
+    arg [/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/lib/darwin/libclang_rt.osx.a]
+  Library search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib]
+  Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/]
+  remove lib [System]
+  remove lib [/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/lib/darwin/libclang_rt.osx.a]
+  collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib]
+  collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks]
+  implicit libs: []
+  implicit dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib]
+  implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks]
 
 

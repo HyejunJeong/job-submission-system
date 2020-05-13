@@ -98,6 +98,7 @@ static Job* deserializeJob(void* startingAddr, int sizeOfJob){
     memcpy((void*) &maxMemory, startingAddr, 4);
     startingAddr += 4;
     job->maxMemory = maxMemory;
+    printf("maxmem=%d\n", maxMemory);
 
     int maxTime;
     memcpy((void*) &maxTime, startingAddr, 4);
@@ -132,32 +133,55 @@ static Job* deserializeJob(void* startingAddr, int sizeOfJob){
 
 }
 
+void print_buf(unsigned char *buf, int len) {
+    int i;
+    unsigned char c;
+    for(i = 0; i < len; i ++) {
+        c = buf[i];
+        if(c == '\0')
+            printf("\\0");
+        else
+            printf("%x", buf[i]);
+    }
+    printf("\n");
+}
+
 static void handleClient(int clientFd){
    LinkedClient* client = getClientByFd(clientFd);
    byte firstByte = '\0';
    recv(clientFd, &firstByte, 1, NULL);
    switch(firstByte){
        case SUBMIT_JOB:{
+           printf("SUBMIT\n");
            int msgSize = 0;
+
            recv(clientFd, (void*) &msgSize, sizeof(int), NULL);
+           print_buf(&msgSize, 1000);
            byte buffer[msgSize];
            Job* job = deserializeJob(buffer, msgSize);
+
            submitJob(client, job);
            break;
        }
        case LIST_JOB:{
+           printf("LIST\n");
+
            listJob(client);
            break;
        }
        case KILL_JOB:{
+           printf("KILL\n");
+
            int jobPid;
            recv(clientFd, (void*) &jobPid, 4, NULL);
+           print_buf(&jobPid, 10);
+
            killJob(clientFd, jobPid);
            break;
        }
 
        default:{
-           send(clientFd, "command not recognize\n", BUFFER_SIZE, NULL);
+           send(clientFd, "command not recognized\n", BUFFER_SIZE, NULL);
            break;
        }
    }
@@ -184,7 +208,6 @@ static void closeClient(int clientFd){
     LinkedClient* client = getClientByFd(clientFd);
     removeClient(client);
 }
-
 
 static void handleConnections(){
     // make the server sock none blocking
@@ -257,7 +280,6 @@ static void create_sock(){
         exit(EXIT_FAILURE);
     }
 }
-
 
 static void runJob(Job* job){
     char** envp = calloc(sizeof(void*), 46); // as far as i can tell, there are 46 enviorment varibles on linux. There might be more or less but.... yeah.... whatever
