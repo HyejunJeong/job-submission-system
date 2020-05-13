@@ -15,7 +15,6 @@
 #include <sys/resource.h>
 #include <signal.h>
 
-
 #include "../../include/constants.h"
 #include "../../include/ClientList.h"
 

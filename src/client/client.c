@@ -1,6 +1,3 @@
-//
-// Created by xgao on 5/4/20.
-//
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -16,20 +13,19 @@
 #define RECV_BUFF_SIZE 20480
 #define MYDBG       fprintf(stderr, "MYDBG:%s:%s:%d:\n",__FILE__,__func__,__LINE__)
 
-static int sock_fd;
-struct sockaddr_un server_addr;
-
 static void create_sock();
 void print_buf(unsigned char *buf, int len);
 void print_usage();
 int submit(unsigned char buffer[BUFFER_SIZE], char **envp);
 int get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp);
 
+static int sock_fd;
+struct sockaddr_un server_addr;
+
 void print_usage(){
     printf("Usage: submit, list, kill\n");
     exit(0);
-}
-
+}s
 
 // prepare the job buffer upon submit cmd entered, returns joblen
 int submit(unsigned char buffer[BUFFER_SIZE], char **envp) {
@@ -126,8 +122,9 @@ void print_buf(unsigned char *buf, int len) {
     printf("\n");
 }
 
-// check user's cmd (submit, list, kill, exit),
+// check if user's cmd matches one of four (submit, list, kill, exit),
 // parse cmd_type to 1, 2, 3 respectively
+// prepare the packet header
 int get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
     int cmd_type = 0;
     int msglen = 0, joblen = 0;
@@ -225,7 +222,4 @@ int main(int argc, char** argv, char** envp) {
 //        printf("%s\n", recv_buffer);
     }
 }
-
-
-
 
