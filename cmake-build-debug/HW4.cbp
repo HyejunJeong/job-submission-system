@@ -8,138 +8,130 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug"/>
+				<Option working_dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug"/>
+				<Option working_dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Client">
-				<Option output="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug"/>
+				<Option output="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/Client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 Client"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 Client"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Client/fast">
-				<Option output="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug"/>
+				<Option output="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/Client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 Client/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 Client/fast"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Server">
-				<Option output="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug"/>
+				<Option output="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Server/fast">
-				<Option output="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug"/>
+				<Option output="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/Server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/10/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 Server/fast"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/xgao/Documents/CSE\ 376/job-submission-system/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/include/ClientList.h">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/include/ClientList.h">
 			<Option target="Client"/>
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/include/constants.h">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/include/constants.h">
 			<Option target="Client"/>
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/include/protocols.h">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/include/protocols.h">
 			<Option target="Client"/>
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/src/client/client.c">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/src/client/client.c">
 			<Option target="Client"/>
 		</Unit>
-		<Unit filename="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/src/server/ClientList.c">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/src/server/server.c">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c">
 			<Option target="Server"/>
 		</Unit>
-		<Unit filename="/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/CMakeLists.txt">
+		<Unit filename="/home/xgao/Documents/CSE 376/job-submission-system/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

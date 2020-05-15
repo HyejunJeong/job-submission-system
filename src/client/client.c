@@ -155,7 +155,7 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
         // set the 1st byte of the packet to cmd_type, 1
         memcpy(packet, &cmd_type, sizeof(int));
         // set the 2nd byte to the msglen
-        memcpy(packet+sizeof(int), &msglen, sizeof(int));
+        memcpy(packet+ 1, &msglen, sizeof(int));
         // set next bytes to the job
         memcpy(packet + 2*sizeof(int), job, joblen);
     }
@@ -186,6 +186,10 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
     else if (strcmp(cmd, "exit") == 0) {
         exit(0);
     }
+
+    int debug;
+    memcpy(&debug, &packet[5], 4);
+
     int sent_bytes = send(sock_fd, packet, msglen, 0);
 }
 

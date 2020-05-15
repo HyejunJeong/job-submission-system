@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/include/constants.h
+/home/xgao/Documents/CSE 376/job-submission-system/include/constants.h
 
-/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/src/client/client.c
+/home/xgao/Documents/CSE 376/job-submission-system/src/client/client.c
 stdio.h
 -
 string.h
@@ -24,5 +24,5 @@ sys/socket.h
 sys/un.h
 -
 ../../include/constants.h
-/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/include/constants.h
+/home/xgao/Documents/CSE 376/job-submission-system/include/constants.h
 

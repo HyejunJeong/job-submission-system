@@ -11,7 +11,6 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/time.h>
 #include <sys/resource.h>
 #include <signal.h>
 
@@ -155,8 +154,9 @@ static void handleClient(int clientFd){
            int msgSize = 0;
 
            recv(clientFd, (void*) &msgSize, sizeof(int), NULL);
-           print_buf(&msgSize, 1000);
+//           print_buf(&msgSize, 1000);
            byte buffer[msgSize];
+           recv(clientFd, (void*) buffer, msgSize, NULL);
            Job* job = deserializeJob(buffer, msgSize);
 
            submitJob(client, job);
