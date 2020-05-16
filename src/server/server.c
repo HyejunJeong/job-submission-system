@@ -21,6 +21,7 @@ static int server_sock_fd;
 static struct sockaddr_un domain_sock_addr;
 static void create_sock();
 static int maxJobs = 10;
+static int currentJob = 0;
 
 void onExitCallBack (void);
 void print_usage(char** argv);
@@ -30,6 +31,7 @@ static void reapChild(void);
 static void submitJob(LinkedClient* client, Job* job);
 static void listJob(LinkedClient* client);
 static void killJob(int clientFd, pid_t pid);
+void print_job(Job* job);
 
 int main(int argc, char** argv, char** envp) {
 
@@ -69,11 +71,12 @@ static void reapChild(void){
         waitid(P_ALL, -1, &infop, WEXITED | WNOHANG);
         if(!infop.si_pid) break;
         LinkedJob* job = getJob(infop.si_pid);
-        if(job == NULL) continue;
+        if(job == NULL) {
+            currentJob -= 1;
+            continue;
+        }
         job->jobStatus = EXITED;
-        char buffer[BUFFER_SIZE];
-        sprintf(buffer, "Job %d finished\n", job->pid);
-        send(job->client->clientFd, buffer, BUFFER_SIZE, NULL);
+        currentJob -= 1;
     }
 }
 
@@ -106,7 +109,7 @@ static Job* deserializeJob(void* startingAddr, int sizeOfJob){
     int priority;
     memcpy((void*) &priority, startingAddr, 4);
     startingAddr += 4;
-    job->priority;
+    job->priority = priority;
 
     int envpSize;
     memcpy((void*) &envpSize, startingAddr, 4);
@@ -123,13 +126,46 @@ static Job* deserializeJob(void* startingAddr, int sizeOfJob){
     startingAddr += 4;
     job->argc = argc;
 
+
     memcpy((void*) &(job->envp), startingAddr, envpSize);
     startingAddr += envpSize;
 
-    char* debug = (char*) startingAddr;
-    memcpy((void*) ((&(job->envp)) + envpSize), startingAddr, argvSize);
+    void* argvAddr = &job->envp;
+    argvAddr += envpSize;
+    memcpy(argvAddr, startingAddr, argvSize);
+//    print_job(job);
     return job;
 
+}
+
+void print_job(Job* job){
+    printf("maxMem: %d, maxTime: %d, maxPriority: %d, envpSize: %d, argvSize: %d, argc: %d\n", job->maxMemory, job->maxTime, job->priority, job->envpSize, job->argvSize, job->argc);
+
+    int i = 0;
+    int envpSize = 0;
+    char* envpPtr = &(job->envp);
+
+    while(envpSize < job->envpSize){
+        char* debug = (char*) envpPtr;
+        int bufferSize = strlen(debug) + 1;
+        printf("envp[%d]: %s, size: %d\n", i, debug, bufferSize);
+        envpSize += bufferSize;
+        envpPtr += bufferSize;
+        i++;
+    }
+
+    int j = 0;
+    int argvSize = 0;
+    char* argvPtr = &(job->envp);
+    argvPtr += job->envpSize;
+    while(argvSize < job->argvSize){
+        char* debug = (char*) argvPtr;
+        int bufferSize = strlen(debug) + 1;
+        printf("argv[%d]: %s, size: %d\n", j, debug, bufferSize);
+        j++;
+        argvSize += bufferSize;
+        argvPtr += bufferSize;
+    }
 }
 
 void print_buf(unsigned char *buf, int len) {
@@ -137,6 +173,7 @@ void print_buf(unsigned char *buf, int len) {
     unsigned char c;
     for(i = 0; i < len; i ++) {
         c = buf[i];
+
         if(c == '\0')
             printf("\\0");
         else
@@ -152,12 +189,14 @@ static void handleClient(int clientFd){
    switch(firstByte){
        case SUBMIT_JOB:{
            int msgSize = 0;
-
            recv(clientFd, (void*) &msgSize, sizeof(int), NULL);
            byte buffer[msgSize];
            recv(clientFd, (void*) buffer, msgSize, NULL);
+           if(currentJob > maxJobs) {
+               send(clientFd, "Max jobs reached, please try again later\n", BUFFER_SIZE, 0);
+               return;
+           }
            Job* job = deserializeJob(buffer, msgSize);
-
            submitJob(client, job);
            break;
        }
@@ -181,16 +220,26 @@ static void handleClient(int clientFd){
 
 static void listJob(LinkedClient* client){
     char buffer[20480]; // will not be enough if clients has too many jobs to print but ... yeah.... whatever.
-
     int count = 0;
     if(client->element->LinkedJob == NULL) sprintf(buffer, "client has no jobs\n");
     else{
         for(LinkedJob* job = client->element->LinkedJob; job != NULL; job = job->next){
-            sprintf((char*)&buffer[count], "Job pid: %d, program name: %s\n", job->pid, (char*) ((&(job->element->envp)) + job->element->envpSize));
-            int strLen = strlen(buffer[count]);
-            count += strLen + 1;
+            char* programName = &job->element->envp;
+            programName += job->element->envpSize;
+            char status[10];
+            if(job->jobStatus == KILLED) {
+                strcpy(status, "Killed");
+            }else if(job->jobStatus == RUNNING){
+                strcpy(status, "running");
+            }else if(job->jobStatus == EXITED) {
+                strcpy(status, "exited");
+            }
+            sprintf((char*)&buffer[count], "Job pid: %d, program name: %s, status: %s\n", job->pid, programName, status);
+            int strLen = strlen(&buffer[count]);
+            count += strLen;
         }
     }
+    buffer[count + 1] = '\0';
     send(client->element->clientFd, buffer, 20480, NULL);
 }
 
@@ -274,7 +323,7 @@ static void create_sock(){
 }
 
 static void runJob(Job* job){
-    char** envp = calloc(sizeof(void*), 46); // as far as i can tell, there are 46 enviorment varibles on linux. There might be more or less but.... yeah.... whatever
+    char** envp = calloc(sizeof(void*), 10); // as far as i can tell, there are 46 enviorment varibles on linux. There might be more or less but.... yeah.... whatever
     int i = 0;
     int envpSize = 0;
     char* envpPtr = &(job->envp);
@@ -288,10 +337,11 @@ static void runJob(Job* job){
         envpPtr += bufferSize;
     }
 
-    char** argv = calloc(sizeof(void*), job->argc);
+    char** argv = calloc(sizeof(void*), job->argc + 1);
     int j = 0;
     int argvSize = 0;
-    char* argvPtr = (&(job->envp)) + job->envpSize;
+    char* argvPtr = &job->envp;
+    argvPtr += job->envpSize;
     while(argvSize < job->argvSize){
         int bufferSize = strlen(argvPtr) + 1;
         char* string = calloc(bufferSize, 1);
@@ -301,12 +351,24 @@ static void runJob(Job* job){
         argvSize += bufferSize;
         argvPtr += bufferSize;
     }
-    execve(argv[1], argv, envp);
-    exit(1); // failed
+
+    printf("-------------------------- Executing new Job --------------------------\n");
+    for(int i = 0; envp[i] != NULL; i++){
+        printf("envp[%d]: %s\n", i, envp[i]);
+    }
+
+    for(int i = 0; argv[i] != NULL; i++){
+        printf("argv[%d]: %s\n", i, argv[i]);
+    }
+
+    execvpe(argv[0], argv, envp);
+    perror("execvp failed");
+    abort();
 }
 
 static void submitJob(LinkedClient* client, Job* job){
     LinkedJob* linkedJob = calloc(sizeof(*linkedJob), 1);
+    currentJob += 1;
     pid_t pid = fork();
 
     if(pid < 0){
@@ -351,13 +413,13 @@ static void submitJob(LinkedClient* client, Job* job){
 }
 
 static void killJob(int clientfd, pid_t pid){
-    Job* job = getJob(pid);
+    LinkedJob * job = getJob(pid);
+    printf("------------------- killing -------------------");
     if(job == NULL) {
-        send(clientfd, "No such pid found\n", BUFFER_SIZE, NULL);
+        printf(clientfd, "No such pid found\n", BUFFER_SIZE, NULL);
         return;
     }
     kill(pid, 9);
-    char buffer[BUFFER_SIZE];
-    sprintf(buffer, "pid %d killed\n", pid);
-    send(clientfd, buffer, BUFFER_SIZE, NULL);
+    job->jobStatus = KILLED;
+    printf("pid %d killed\n", pid);
 }
