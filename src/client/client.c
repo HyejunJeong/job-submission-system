@@ -216,8 +216,6 @@ static void create_sock(){
 int main(int argc, char** argv, char** envp) {
     char cmdline[MAXLINE];
     unsigned char packet[BUFFER_SIZE];
-    int msglen = 0, received_bytes = 0;
-    char recv_buffer[RECV_BUFF_SIZE];
 
     // set up the socket
     create_sock();
@@ -234,12 +232,6 @@ int main(int argc, char** argv, char** envp) {
             // prepare the packet
             get_cmd_type(cmdline, &packet[0], envp);
         }
-
-//        if((received_bytes = recv(sock_fd, recv_buffer, RECV_BUFF_SIZE, 0)) < 0) {
-//            perror("receiving data");
-//            exit(1);
-//        }
-//        printf("%s", recv_buffer);
     }
 }
 
