@@ -67,17 +67,17 @@ int submit(unsigned char buffer[BUFFER_SIZE], char **envp) {
         // prompt the user to enter and get maxmem, maxtime, priority
         printf("(byte) max_mem_to_consume=");
         fgets(temp, sizeof(temp)-1, stdin);
-        sscanf(temp, "%d", &mem);
+        mem = atoi(temp);
         memset(temp, 0 , MAXLINE);
 
         printf("(sec) max_time_to_run=");
         fgets(temp, sizeof(temp)-1, stdin);
-        sscanf(temp, "%d", &time);
+        time = atoi(temp);
         memset(temp, 0 , MAXLINE);
 
         printf("priority=");
         fgets(temp, sizeof(temp)-1, stdin);
-        sscanf(temp, "%d", &prior);
+        prior = atoi(temp);
         memset(temp, 0 , MAXLINE);
 
         // copy mem, time, priority, envplen, argvlen, argc, envp, argc in order
@@ -134,7 +134,7 @@ void print_buf(unsigned char *buf, int len) {
 // parse cmd_type to 1, 2, 3 respectively
 // prepare the packet header
 void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
-    int cmd_type = 0;
+    byte cmd_type = 0;
     int msglen = 0, joblen = 0;
     unsigned char job[BUFFER_SIZE];
 
@@ -153,18 +153,18 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
         msglen += joblen;   // cmd_type + msglen + job
 
         // set the 1st byte of the packet to cmd_type, 1
-        memcpy(packet, &cmd_type, sizeof(int));
+        memcpy(packet, &cmd_type, 1);
         // set the 2nd byte to the msglen
-        memcpy(packet+ 1, &msglen, sizeof(int));
+        memcpy(packet+1, &msglen, sizeof(int));
         // set next bytes to the job
-        memcpy(packet + 2*sizeof(int), job, joblen);
+        memcpy(packet+1+sizeof(int), job, joblen);
     }
     else if (strcmp(cmd, "list") == 0) {
         cmd_type = 2;
         msglen = sizeof(int);
 
         // set the 1st byte of the packet to cmd_type, 2
-        memcpy(packet, &cmd_type, sizeof(int));
+        memcpy(packet, &cmd_type, 1);
     }
     else if (strcmp(cmd, "kill") == 0) {
         cmd_type = 3;
@@ -176,21 +176,46 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
         // prompt the user to enter jobpid to kill
         printf("jobpid=");
         fgets(temp, sizeof(temp)-1, stdin);
-        sscanf(temp, "%d", &jobpid);
+        jobpid = atoi(temp);
 
         // copy cmd_type and jobpid to packet
-        memcpy(packet, &cmd_type, sizeof(int));
-        memcpy(packet+sizeof(int), &jobpid, sizeof(int));
+        memcpy(packet, &cmd_type, 1);
+        memcpy(packet+1, &jobpid, sizeof(int));
         //print_buf(packet, msglen);
     }
     else if (strcmp(cmd, "exit") == 0) {
         exit(0);
     }
 
-    int debug;
-    memcpy(&debug, &packet[5], 4);
+//    byte type;      // 0
+//    int dbg_msglen; // 1..4
+//    int dbg_maxmem; // 5..8
+//    int dbg_maxtime;    // 9..12
+//    int dbg_priority;   // 13..16
+//    int dbg_envpsize;   // 17..20
+//    int dbg_argvsize;   // 21..24
+//    int dbg_argc;       // 25..28
+//
+//    memcpy(&type, &packet[0], 1);
+//    memcpy(&dbg_msglen, &packet[1], 4);
+//    memcpy(&dbg_maxmem, &packet[5], 4);
+//    memcpy(&dbg_maxtime, &packet[9], 4);
+//    memcpy(&dbg_priority, &packet[13], 4);
+//    memcpy(&dbg_envpsize, &packet[17], 4);
+//    memcpy(&dbg_argvsize, &packet[21], 4);
+//    memcpy(&dbg_argc, &packet[25], 4);
+//
+//    printf("type=%d\n", type);
+//    printf("msglen=%d\n", dbg_msglen);
+//    printf("maxmem=%d\n", dbg_maxmem);
+//    printf("maxtime=%d\n", dbg_maxtime);
+//    printf("priority=%d\n", dbg_priority);
+//    printf("envpsize=%d\n", dbg_envpsize);
+//    printf("argvsize=%d\n", dbg_argvsize);
+//    printf("argc=%d\n", dbg_argc);
 
     int sent_bytes = send(sock_fd, packet, msglen, 0);
+    // printf("send\n");
 }
 
 static void create_sock(){

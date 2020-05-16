@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/xgao/Documents/CSE 376/job-submission-system/src/server/ClientList.c" "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/Server.dir/src/server/ClientList.c.o"
-  "/home/xgao/Documents/CSE 376/job-submission-system/src/server/server.c" "/home/xgao/Documents/CSE 376/job-submission-system/cmake-build-debug/CMakeFiles/Server.dir/src/server/server.c.o"
+  "/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/src/server/ClientList.c" "/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/Server.dir/src/server/ClientList.c.o"
+  "/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/src/server/server.c" "/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/cmake-build-debug/CMakeFiles/Server.dir/src/server/server.c.o"
   )
-set(CMAKE_C_COMPILER_ID "GNU")
+set(CMAKE_C_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
