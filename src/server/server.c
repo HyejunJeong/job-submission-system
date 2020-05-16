@@ -97,7 +97,6 @@ static Job* deserializeJob(void* startingAddr, int sizeOfJob){
     memcpy((void*) &maxMemory, startingAddr, 4);
     startingAddr += 4;
     job->maxMemory = maxMemory;
-    printf("maxmem=%d\n", maxMemory);
 
     int maxTime;
     memcpy((void*) &maxTime, startingAddr, 4);
@@ -155,7 +154,6 @@ static void handleClient(int clientFd){
            int msgSize = 0;
 
            recv(clientFd, (void*) &msgSize, sizeof(int), NULL);
-//           print_buf(&msgSize, 1000);
            byte buffer[msgSize];
            recv(clientFd, (void*) buffer, msgSize, NULL);
            Job* job = deserializeJob(buffer, msgSize);
@@ -170,8 +168,6 @@ static void handleClient(int clientFd){
        case KILL_JOB:{
            int jobPid;
            recv(clientFd, (void*) &jobPid, 4, NULL);
-           print_buf(&jobPid, 10);
-
            killJob(clientFd, jobPid);
            break;
        }
