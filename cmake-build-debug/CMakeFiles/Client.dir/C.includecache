@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/include/constants.h
+
+/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/src/client/client.c
+stdio.h
+-
+string.h
+-
+unistd.h
+-
+pwd.h
+-
+stdlib.h
+-
+sys/socket.h
+-
+sys/un.h
+-
+../../include/constants.h
+/Users/HyejunJEONG/Documents/SUNY_20/CSE376/hw/hw4/include/constants.h
+
