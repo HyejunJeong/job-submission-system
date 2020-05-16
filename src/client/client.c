@@ -215,7 +215,9 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
 //    printf("argc=%d\n", dbg_argc);
 
     int sent_bytes = send(sock_fd, packet, msglen, 0);
-    // printf("send\n");
+    char response[BUFFER_SIZE];
+    recv(sock_fd, response, BUFFER_SIZE, 0);
+    printf("%s\n", response);
 }
 
 static void create_sock(){

@@ -127,6 +127,7 @@ static Job* deserializeJob(void* startingAddr, int sizeOfJob){
     memcpy((void*) &(job->envp), startingAddr, envpSize);
     startingAddr += envpSize;
 
+    char* debug = (char*) startingAddr;
     memcpy((void*) ((&(job->envp)) + envpSize), startingAddr, argvSize);
     return job;
 
@@ -317,7 +318,7 @@ static void submitJob(LinkedClient* client, Job* job){
         exit(0);
     }
 
-    if(pid > 0){
+    if(pid == 0){
         struct rlimit rl;
         getrlimit(RLIMIT_AS, &rl);
 
@@ -342,12 +343,13 @@ static void submitJob(LinkedClient* client, Job* job){
     linkedJob->element = job;
     if(client->element->LinkedJob == NULL){
         client->element->LinkedJob = linkedJob;
-        return;
+    }else{
+        LinkedJob* lastLinkedJob = NULL;
+        for(lastLinkedJob = client->element->LinkedJob; lastLinkedJob->next != NULL; lastLinkedJob = lastLinkedJob->next);
+        lastLinkedJob->next = linkedJob;
     }
 
-    LinkedJob* lastLinkedJob = NULL;
-    for(lastLinkedJob = client->element->LinkedJob; lastLinkedJob->next != NULL; lastLinkedJob = lastLinkedJob->next);
-    lastLinkedJob->next = linkedJob;
+
     send(client->element->clientFd, "Job successfully started\n", BUFFER_SIZE, NULL);
     return;
 }
