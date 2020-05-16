@@ -227,8 +227,7 @@ static void listJob(LinkedClient* client){
             char* programName = &job->element->envp;
             programName += job->element->envpSize;
             char status[10];
-            char jobStdOut[2048];
-            jobStdOut[0] = 'N/A';
+            char jobStdOut[2048] = "N/A";
             if(job->jobStatus == KILLED) {
                 strcpy(status, "Killed");
             }else if(job->jobStatus == RUNNING){
