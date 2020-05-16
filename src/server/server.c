@@ -227,14 +227,17 @@ static void listJob(LinkedClient* client){
             char* programName = &job->element->envp;
             programName += job->element->envpSize;
             char status[10];
+            char jobStdOut[2048];
+            jobStdOut[0] = 'N/A';
             if(job->jobStatus == KILLED) {
                 strcpy(status, "Killed");
             }else if(job->jobStatus == RUNNING){
                 strcpy(status, "running");
             }else if(job->jobStatus == EXITED) {
+                read(job->pipe[0], jobStdOut, 2048);
                 strcpy(status, "exited");
             }
-            sprintf((char*)&buffer[count], "Job pid: %d, program name: %s, status: %s\n", job->pid, programName, status);
+            sprintf((char*)&buffer[count], "Job pid: %d, program name: %s, status: %s\nstdout after exited:\n %s\n", job->pid, programName, status, jobStdOut);
             int strLen = strlen(&buffer[count]);
             count += strLen;
         }
@@ -352,14 +355,14 @@ static void runJob(Job* job){
         argvPtr += bufferSize;
     }
 
-    printf("-------------------------- Executing new Job --------------------------\n");
-    for(int i = 0; envp[i] != NULL; i++){
-        printf("envp[%d]: %s\n", i, envp[i]);
-    }
-
-    for(int i = 0; argv[i] != NULL; i++){
-        printf("argv[%d]: %s\n", i, argv[i]);
-    }
+//    printf("-------------------------- Executing new Job --------------------------\n");
+//    for(int i = 0; envp[i] != NULL; i++){
+//        printf("envp[%d]: %s\n", i, envp[i]);
+//    }
+//
+//    for(int i = 0; argv[i] != NULL; i++){
+//        printf("argv[%d]: %s\n", i, argv[i]);
+//    }
 
     execvpe(argv[0], argv, envp);
     perror("execvp failed");
@@ -369,6 +372,8 @@ static void runJob(Job* job){
 static void submitJob(LinkedClient* client, Job* job){
     LinkedJob* linkedJob = calloc(sizeof(*linkedJob), 1);
     currentJob += 1;
+    int pipefd[2];
+    pipe(pipefd);
     pid_t pid = fork();
 
     if(pid < 0){
@@ -377,6 +382,10 @@ static void submitJob(LinkedClient* client, Job* job){
     }
 
     if(pid == 0){
+        // creating pipe
+        close(pipefd[0]);
+        dup2(pipefd[1], STDOUT_FILENO);
+        close(pipefd[1]);
         struct rlimit rl;
         getrlimit(RLIMIT_AS, &rl);
 
@@ -394,11 +403,13 @@ static void submitJob(LinkedClient* client, Job* job){
 
         runJob(job);
     }
-
     linkedJob->pid = pid;
     linkedJob->client = client;
     linkedJob->jobStatus = RUNNING;
     linkedJob->element = job;
+    linkedJob->pipe[0] = pipefd[0];
+    linkedJob->pipe[1] = pipefd[1];
+    close(pipefd[1]);
     if(client->element->LinkedJob == NULL){
         client->element->LinkedJob = linkedJob;
     }else{

@@ -15,6 +15,7 @@ typedef struct LinkedJob{
     int jobStatus;
     pid_t pid;
     struct Client* client;
+    int pipe[2];
 } LinkedJob;
 
 // holds the clientfd and other info, not sure what yet
