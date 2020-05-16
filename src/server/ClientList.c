@@ -3,6 +3,7 @@
 //
 #include <stddef.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "../../include/ClientList.h"
 
 static int size = 0;
@@ -41,6 +42,7 @@ void removeClient(LinkedClient* linkedClient){
     LinkedJob* job = currentClient->element->LinkedJob;
     while(job != NULL){
         LinkedJob* current = job;
+        close(job->pipe[0]);
         job = job->next;
         free(current->element);
         free(current);
