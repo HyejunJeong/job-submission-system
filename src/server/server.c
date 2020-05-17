@@ -325,7 +325,7 @@ static void create_sock(){
 }
 
 static void runJob(Job* job){
-    printf("runJob\n");
+//    printf("runJob\n");
     char** envp = calloc(sizeof(void*), 10); // as far as i can tell, there are 46 enviorment varibles on linux. There might be more or less but.... yeah.... whatever
     int i = 0;
     int envpSize = 0;
@@ -385,6 +385,7 @@ static void submitJob(LinkedClient* client, Job* job){
         // creating pipe
         close(pipefd[0]);
         dup2(pipefd[1], STDOUT_FILENO);
+        dup2(pipefd[1], STDERR_FILENO);
         close(pipefd[1]);
         struct rlimit rl;
         getrlimit(RLIMIT_AS, &rl);
