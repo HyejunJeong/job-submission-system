@@ -1,4 +1,4 @@
-CFLAGS = -g -O5 -Wall -Werror -Wextra
+CFLAGS = -g -O2 -Wall -Werror -Wextra
 
 SRC_SERVER=$(wildcard src/server/*.c)
 SRC_CLIENT=$(wildcard src/client/*.c)
