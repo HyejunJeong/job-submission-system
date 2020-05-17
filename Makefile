@@ -17,3 +17,5 @@ Client: $(SRC_CLIENT)
 .PHONY: clean
 clean:
 	rm -rf ./Server ./Client
+	rm -rf Server.* Client.*
+	rm -rf cmake-build-debug
