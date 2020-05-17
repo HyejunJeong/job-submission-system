@@ -48,11 +48,19 @@ int submit(unsigned char buffer[BUFFER_SIZE], char **envp) {
 
         // prepare argv: tokenize user input, attach null char after each command
         argv = (char **) malloc((strlen(cmdline) + 1) * sizeof(char *));
-
+        if(!argv) {
+            perror("malloc failed");
+            exit(1);
+        }
         char *token = strtok(cmdline, DELIM);
         while (token) {
             size_t length = strlen(token) + 1;
             argv[argc] = malloc(length);
+            if(!argv[argc]) {
+                perror("malloc failed");
+                free(argv);
+                exit(1);
+            }
             memcpy(argv[argc], token, length);
 
             argc++;
@@ -186,8 +194,6 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
             printf("jobpid=");
             if(!fgets(temp, sizeof(temp)-1, stdin))
                 printf("Enter jobpid to kill.\n");
-
-
             jobpid = atoi(temp);
 
             memcpy(packet, &cmd_type, 1);
@@ -197,7 +203,6 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
         }
 
         send(sock_fd, packet, msglen, 0);
-        //printf("sent\n");
 
         char response[RECV_BUFF_SIZE];
         memset(response, 0 , RECV_BUFF_SIZE);
@@ -209,7 +214,6 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
         printf("%s", response);
 
         return;
-
     }
     else {
         printf("%s\n", "command not found");
