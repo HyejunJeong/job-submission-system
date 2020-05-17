@@ -178,7 +178,10 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
 
             // prompt the user to enter jobpid to kill
             printf("jobpid=");
-            fgets(temp, sizeof(temp) - 1, stdin);
+            if(!fgets(temp, sizeof(temp)-1, stdin))
+                printf("Enter jobpid to kill.\n");
+
+
             jobpid = atoi(temp);
 
             memcpy(packet, &cmd_type, 1);
