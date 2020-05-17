@@ -16,6 +16,7 @@ typedef struct LinkedJob{
     pid_t pid;
     struct Client* client;
     int pipe[2];
+    char* clientStdOut;
 } LinkedJob;
 
 // holds the clientfd and other info, not sure what yet

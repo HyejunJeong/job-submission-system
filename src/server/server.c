@@ -227,13 +227,24 @@ static void listJob(LinkedClient* client){
             char* programName = (char*)&job->element->envp;
             programName += job->element->envpSize;
             char status[10];
-            char jobStdOut[2048] = "N/A";
+            char* jobStdOut = (job->clientStdOut == NULL) ? calloc(2048, 1) : job->clientStdOut;
             if(job->jobStatus == KILLED) {
                 strcpy(status, "Killed");
+                if(job->clientStdOut == NULL){
+                    strcpy(jobStdOut, "N/A");
+                    job->clientStdOut = jobStdOut;
+                }
             }else if(job->jobStatus == RUNNING){
                 strcpy(status, "running");
+                if(job->clientStdOut == NULL){
+                    strcpy(jobStdOut, "N/A");
+                    job->clientStdOut = jobStdOut;
+                }
             }else if(job->jobStatus == EXITED) {
-                read(job->pipe[0], jobStdOut, 2048);
+                if(job->clientStdOut == NULL){
+                    read(job->pipe[0], jobStdOut, 2048);
+                    job->clientStdOut = jobStdOut;
+                }
                 strcpy(status, "exited");
             }
             sprintf((char*)&buffer[count], "Job pid: %d, program name: %s, status: %s\nstdout after exited:\n %s\n", job->pid, programName, status, jobStdOut);

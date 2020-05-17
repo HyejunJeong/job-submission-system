@@ -44,6 +44,7 @@ void removeClient(LinkedClient* linkedClient){
         LinkedJob* current = job;
         close(job->pipe[0]);
         job = job->next;
+        free(current->clientStdOut);
         free(current->element);
         free(current);
     }
