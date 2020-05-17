@@ -1,11 +1,38 @@
 Designed document for HW4.
 
-Server Arg, server takes in -j [max jobs] which tells the server how many max jobs can be run at once.
-Default is 10.
+Server usage:
+server runs with the option -j [max jobs] which tells the server how many max jobs can be run at once.
+Default is 10 if this option is omitted.
 
-LinkedList:
-All the client connections are stored inside a linkedlist structure.
-Each client object holds the client file descriptor. New client connection will be inserted into this linked list when connection is accepted.
+Client LinkedList:
+All the client connections are stored inside a Linked List structure.
+Within the LinkedList, there is the Client structure which is stores all the information about the client.
+Each client object holds the client file descriptor as well as a Linked List of jobs. New client connection will be inserted into this Linked List when connection is accepted.
 Client that closes the connection will be removed when connection is terminated.
+
+Job LinkedList:
+Job LinkedList is another LinkedList Inside the Client structure, inside we have element which is the Job structure that describes the job submitted by the client such as the max memory, max cpu time, argc count, argv size, envp size.
+These structure are where the job from the receiving buffer will be deserialize into. Argv and envp are treated as consecutive strings in the structure terminated by null bytes.
+Besides the Job structure, this LinkedList node also stores the exit status of the client, what it receives from the job's stdout and stdin, its job pid, as well as the pipe file descriptors used for reading the outputs from the job.
+
+Packet Structure:
+We used a slightly different protocols than the ones describes in the HW4.pdf. Our protocol consists of a command byte which has a value of 1,2,3.
+1 is for submitting new jobs, 2 is for listing jobs, 3 is for killing jobs as per the HW4.pdf. The next 4 bytes are the job message size which describes the length of the buffer containing all the information about the job.
+The next 24 vytes are divided into four each hold the values for max memory, max cpu time, max priority, envp size, argv size, argc respectively.
+The rest of the bytes after that are consecutive strings of argv and envp each terminated by a null byte.
+For the client side, no protocols is used, instead the server sends back plaint text information about the status of a client's request.
+
+Implementation:
+For implementing a multiclient server, we are using the poll function. No threads and forks are use for this purposes.
+The server runs in an infintie loop and will hang until a new client connects or an existing clients sends something.
+It will then proccess these requests and rises and repeat.
+
+For new job submission, the server deserializes the receiving packet and creates a LinkedList job struct from it. It then uses fork to fork a child proccess to begin the job.
+The child process checks the max cpu time, max memory, max priority and sets them accordingly using the rlimit system calls and setpriority system calls.
+
+Each terminated jobs are reaped by the parent server upon completion. When a client send a list request, it will print all the jobs for that specific client.
+If a job terminated upon comepoletion, list request will display that job as termianted and print out the output of that job.
+For killing a job, we are sing the kill system call. After killing a job, its job status will say killed. The output of this job will not be kept in this case and will say N/A.
+If a job is still running, it will display running as its status and N/A as its output since it is still running.
 
 
