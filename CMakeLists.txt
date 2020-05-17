@@ -3,6 +3,8 @@ project(HW4 C)
 
 set(CMAKE_C_STANDARD 99)
 
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O5 -Wall -Werror -Wextra")
+
 file(GLOB client_src
         "include/*.h"
         "src/client/*.c"

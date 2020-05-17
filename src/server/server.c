@@ -33,7 +33,7 @@ static void listJob(LinkedClient* client);
 static void killJob(int clientFd, pid_t pid);
 void print_job(Job* job);
 
-int main(int argc, char** argv, char** envp) {
+int main(int argc, char** argv) {
 
     parse_args(argc, argv);
 
@@ -80,8 +80,8 @@ static void reapChild(void){
     }
 }
 
-static void init_pollfd(struct pollfd fds[]){
-    memset(fds, 0, sizeof(fds));
+static void init_pollfd(struct pollfd fds[], int length){
+    memset(fds, 0, length);
     fds[0].fd = server_sock_fd;
     fds[0].events = POLLIN;
     int count = 1;
@@ -143,7 +143,7 @@ void print_job(Job* job){
 
     int i = 0;
     int envpSize = 0;
-    char* envpPtr = &(job->envp);
+    char* envpPtr = (char*) &(job->envp);
 
     while(envpSize < job->envpSize){
         char* debug = (char*) envpPtr;
@@ -156,7 +156,7 @@ void print_job(Job* job){
 
     int j = 0;
     int argvSize = 0;
-    char* argvPtr = &(job->envp);
+    char* argvPtr = (char*) &(job->envp);
     argvPtr += job->envpSize;
     while(argvSize < job->argvSize){
         char* debug = (char*) argvPtr;
@@ -185,13 +185,13 @@ void print_buf(unsigned char *buf, int len) {
 static void handleClient(int clientFd){
    LinkedClient* client = getClientByFd(clientFd);
    byte firstByte = '\0';
-   recv(clientFd, &firstByte, 1, NULL);
+   recv(clientFd, &firstByte, 1, 0);
    switch(firstByte){
        case SUBMIT_JOB:{
            int msgSize = 0;
-           recv(clientFd, (void*) &msgSize, sizeof(int), NULL);
+           recv(clientFd, (void*) &msgSize, sizeof(int), 0);
            byte buffer[msgSize];
-           recv(clientFd, (void*) buffer, msgSize, NULL);
+           recv(clientFd, (void*) buffer, msgSize, 0);
            if(currentJob > maxJobs) {
                send(clientFd, "Max jobs reached, please try again later\n", BUFFER_SIZE, 0);
                return;
@@ -206,13 +206,13 @@ static void handleClient(int clientFd){
        }
        case KILL_JOB:{
            int jobPid;
-           recv(clientFd, (void*) &jobPid, 4, NULL);
+           recv(clientFd, (void*) &jobPid, 4, 0);
            killJob(clientFd, jobPid);
            break;
        }
 
        default:{
-           send(clientFd, "command not recognized\n", BUFFER_SIZE, NULL);
+           send(clientFd, "command not recognized\n", BUFFER_SIZE, 0);
            break;
        }
    }
@@ -224,7 +224,7 @@ static void listJob(LinkedClient* client){
     if(client->element->LinkedJob == NULL) sprintf(buffer, "client has no jobs\n");
     else{
         for(LinkedJob* job = client->element->LinkedJob; job != NULL; job = job->next){
-            char* programName = &job->element->envp;
+            char* programName = (char*)&job->element->envp;
             programName += job->element->envpSize;
             char status[10];
             char jobStdOut[2048] = "N/A";
@@ -242,7 +242,7 @@ static void listJob(LinkedClient* client){
         }
     }
     buffer[count + 1] = '\0';
-    send(client->element->clientFd, buffer, 20480, NULL);
+    send(client->element->clientFd, buffer, 20480, 0);
 }
 
 // client closes its connection
@@ -258,9 +258,9 @@ static void handleConnections(){
     do {
         int clientFdsNum = getClientListSize();
         struct pollfd fds[clientFdsNum + 1];
-        init_pollfd(fds);
+        init_pollfd(fds, clientFdsNum + 1);
         // hangs here until a client socket sends something
-        int readyFdNum = poll(fds, clientFdsNum + 1, -1);
+        poll(fds, clientFdsNum + 1, -1);
 
         // reap finished jobs
         reapChild();
@@ -300,7 +300,7 @@ void print_usage(char** argv){
 void onExitCallBack (void){
     printf("deleting the file, please rerun the server\n");
     struct passwd *pw = getpwuid(getuid());
-    const char *homedir = pw->pw_dir;
+    char *homedir = pw->pw_dir;
     const char* file_path = strcat(homedir, FILE_NAME);
     // unlock the domain socket. This will create a process lock otherwise
     unlink(file_path);
@@ -329,7 +329,7 @@ static void runJob(Job* job){
     char** envp = calloc(sizeof(void*), 10); // as far as i can tell, there are 46 enviorment varibles on linux. There might be more or less but.... yeah.... whatever
     int i = 0;
     int envpSize = 0;
-    char* envpPtr = &(job->envp);
+    char* envpPtr = (char*) &(job->envp);
     while(envpSize < job->envpSize){
         int bufferSize = strlen(envpPtr) + 1;
         char* string = calloc(bufferSize, 1);
@@ -343,7 +343,7 @@ static void runJob(Job* job){
     char** argv = calloc(sizeof(void*), job->argc + 1);
     int j = 0;
     int argvSize = 0;
-    char* argvPtr = &job->envp;
+    char* argvPtr = (char*) &job->envp;
     argvPtr += job->envpSize;
     while(argvSize < job->argvSize){
         int bufferSize = strlen(argvPtr) + 1;
@@ -405,7 +405,7 @@ static void submitJob(LinkedClient* client, Job* job){
         runJob(job);
     }
     linkedJob->pid = pid;
-    linkedJob->client = client;
+    linkedJob->client = client->element;
     linkedJob->jobStatus = RUNNING;
     linkedJob->element = job;
     linkedJob->pipe[0] = pipefd[0];
@@ -420,7 +420,7 @@ static void submitJob(LinkedClient* client, Job* job){
     }
 
 
-    send(client->element->clientFd, "Job successfully started\n", BUFFER_SIZE, NULL);
+    send(client->element->clientFd, "Job successfully started\n", BUFFER_SIZE, 0);
     return;
 }
 
@@ -428,10 +428,10 @@ static void killJob(int clientfd, pid_t pid){
     LinkedJob * job = getJob(pid);
     printf("------------------- killing -------------------");
     if(job == NULL) {
-        printf(clientfd, "No such pid found\n", BUFFER_SIZE, NULL);
+        send(clientfd, "No such pid found\n", BUFFER_SIZE, 0);
         return;
     }
     kill(pid, 9);
     job->jobStatus = KILLED;
-    printf("pid %d killed\n", pid);
+    send(clientfd, "pid %d killed\n", pid, 0);
 }

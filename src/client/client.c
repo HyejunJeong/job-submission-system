@@ -30,7 +30,7 @@ void print_usage(){
 // prepare the job buffer upon submit cmd entered, returns joblen
 int submit(unsigned char buffer[BUFFER_SIZE], char **envp) {
     int joblen = 0, argvlen = 0, envplen = strlen(*envp) + 1;
-    char **argv;
+    char **argv = NULL;
     int time, mem, prior, i, argc = 0;
     char cmdline[MAXLINE];
 
@@ -183,7 +183,7 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
             exit(0);
         }
 
-        int sent_bytes = send(sock_fd, packet, msglen, 0);
+        send(sock_fd, packet, msglen, 0);
         //printf("sent\n");
 
         char response[RECV_BUFF_SIZE];
@@ -214,6 +214,8 @@ static void create_sock(){
 }
 
 int main(int argc, char** argv, char** envp) {
+    FILE* null = fopen("/dev/null", "w");
+    fprintf(null, "%d%s", argc, argv[0]);
     char cmdline[MAXLINE];
     unsigned char packet[BUFFER_SIZE];
 
