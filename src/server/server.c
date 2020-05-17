@@ -383,7 +383,7 @@ static void runJob(Job* job){
 //        printf("argv[%d]: %s\n", i, argv[i]);
 //    }
 
-    execve(argv[0], argv, envp);
+    execvpe(argv[0], argv, envp);
     perror("execvp failed");
     abort();
 }
