@@ -325,6 +325,7 @@ static void create_sock(){
 }
 
 static void runJob(Job* job){
+    printf("runJob\n");
     char** envp = calloc(sizeof(void*), 10); // as far as i can tell, there are 46 enviorment varibles on linux. There might be more or less but.... yeah.... whatever
     int i = 0;
     int envpSize = 0;
@@ -363,7 +364,7 @@ static void runJob(Job* job){
 //        printf("argv[%d]: %s\n", i, argv[i]);
 //    }
 
-    execvpe(argv[0], argv, envp);
+    execve(argv[0], argv, envp);
     perror("execvp failed");
     abort();
 }

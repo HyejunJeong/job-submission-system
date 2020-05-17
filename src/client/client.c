@@ -170,7 +170,7 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
             int jobpid = 0;
             char temp[MAXLINE];
 
-            msglen = 2 * sizeof(int); // one for cmd_type, another for pid
+            msglen = 1 + sizeof(int); // one for cmd_type, another for pid
 
             // prompt the user to enter jobpid to kill
             printf("jobpid=");
