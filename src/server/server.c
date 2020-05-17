@@ -242,9 +242,8 @@ static void listJob(LinkedClient* client){
                 }
             }else if(job->jobStatus == EXITED) {
                 if(job->clientStdOut == NULL){
-                    int readbytes;
-                    if((readbytes = read(job->pipe[0], jobStdOut, 2048)) < 0) {
-                        perror("read failed");
+                    if(read(job->pipe[0], jobStdOut, 2048) < 0) {
+                        perror("read error");
                         exit(0);
                     }
                     job->clientStdOut = jobStdOut;
@@ -388,11 +387,11 @@ static void submitJob(LinkedClient* client, Job* job){
     LinkedJob* linkedJob = calloc(sizeof(*linkedJob), 1);
     currentJob += 1;
     int pipefd[2];
-    int retval;
-    if((retval = pipe(pipefd)) < 0) {
-        perror("pipe");
+    if(pipe(pipefd) < 0) {
+        perror("pipe failed");
         exit(0);
     }
+
     pid_t pid = fork();
 
     if(pid < 0){

@@ -67,19 +67,20 @@ int submit(unsigned char buffer[BUFFER_SIZE], char **envp) {
         // prompt the user to enter and get maxmem, maxtime, priority
         printf("(byte) max_mem_to_consume=");
         if(!fgets(temp, sizeof(temp)-1, stdin))
-            printf("Failed to fgets.\n");
+            printf("Enter max memory to consume in bytes.\n");
         mem = atoi(temp);
         memset(temp, 0 , MAXLINE);
 
         printf("(sec) max_time_to_run=");
         if(!fgets(temp, sizeof(temp)-1, stdin))
-            printf("Failed to fgets.\n");
+            printf("Enter max time to run in seconds.\n");
         time = atoi(temp);
         memset(temp, 0 , MAXLINE);
 
         printf("priority=");
         if(!fgets(temp, sizeof(temp)-1, stdin))
-            printf("Failed to fgets.\n");
+            printf("Enter priority.\n");
+
         prior = atoi(temp);
         memset(temp, 0 , MAXLINE);
 
@@ -177,9 +178,7 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
 
             // prompt the user to enter jobpid to kill
             printf("jobpid=");
-            if(!fgets(temp, sizeof(temp) - 1, stdin))
-                printf("Failed to fgets.\n");
-
+            fgets(temp, sizeof(temp) - 1, stdin);
             jobpid = atoi(temp);
 
             memcpy(packet, &cmd_type, 1);
