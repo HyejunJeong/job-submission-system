@@ -160,7 +160,7 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
 
             joblen = submit(&job[0], envp);
 
-            msglen += sizeof(int) * 2;  // cmd_type + msglen
+            msglen += 1 + sizeof(int);  // cmd_type + msglen
             msglen += joblen;   // cmd_type + msglen + job
 
             // set the 1st byte of the packet to cmd_type, 1
@@ -171,7 +171,7 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
             memcpy(packet + 1 + sizeof(int), job, joblen);
         } else if (strcmp(cmd, "list") == 0) {
             cmd_type = 2;
-            msglen = sizeof(int);
+            msglen = 1;
 
             // set the 1st byte of the packet to cmd_type, 2
             memcpy(packet, &cmd_type, 1);
@@ -207,6 +207,8 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
             exit(1);
         }
         printf("%s", response);
+
+        return;
 
     }
     else {
