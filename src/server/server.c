@@ -220,8 +220,12 @@ static void handleClient(int clientFd){
 
 static void listJob(LinkedClient* client){
     char buffer[20480]; // will not be enough if clients has too many jobs to print but ... yeah.... whatever.
+    memset(buffer, 0 , 20480);
+
     int count = 0;
-    if(client->element->LinkedJob == NULL) sprintf(buffer, "client has no jobs\n");
+    if(client->element->LinkedJob == NULL) {
+        sprintf(buffer, "client has no jobs\n");
+    }
     else{
         for(LinkedJob* job = client->element->LinkedJob; job != NULL; job = job->next){
             char* programName = (char*)&job->element->envp;
@@ -255,7 +259,9 @@ static void listJob(LinkedClient* client){
             count += strLen;
         }
     }
-    buffer[count + 1] = '\0';
+
+    if(count > 0)
+        buffer[count + 1] = '\0';
     send(client->element->clientFd, buffer, 20480, 0);
 }
 

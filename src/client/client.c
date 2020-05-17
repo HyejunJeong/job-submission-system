@@ -147,6 +147,12 @@ void get_cmd_type(char *cmd, unsigned char packet[BUFFER_SIZE], char **envp) {
 
     // clear the packet
     memset(packet, 0, BUFFER_SIZE);
+
+    // ignore empty line
+    if(cmd[0] == '\0') {
+        return;
+    }
+
     if(!strcmp(cmd, "submit") || !strcmp(cmd, "list")
     || !strcmp(cmd, "kill") || !strcmp(cmd, "exit")) {
         if (strcmp(cmd, "submit") == 0) {
