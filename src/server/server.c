@@ -449,12 +449,11 @@ static void submitJob(LinkedClient* client, Job* job){
 
 static void killJob(int clientfd, pid_t pid){
     LinkedJob * job = getJob(pid);
-    printf("------------------- killing -------------------");
     if(job == NULL) {
         send(clientfd, "No such pid found\n", BUFFER_SIZE, 0);
         return;
     }
     kill(pid, 9);
     job->jobStatus = KILLED;
-    send(clientfd, "pid %d killed\n", pid, 0);
+    send(clientfd, "pid killed\n", BUFFER_SIZE, 0);
 }
